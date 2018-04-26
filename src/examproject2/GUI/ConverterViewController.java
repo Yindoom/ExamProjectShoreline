@@ -10,33 +10,42 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /**
+ * FXML Controller class
  *
- * @author Yindo
+ * @author ZeXVex
  */
-public class MainViewController implements Initializable {
+public class ConverterViewController implements Initializable {
 
     @FXML
-    private TextField txtName;
+    private ComboBox<?> cbmSettings;
     @FXML
-    private TextField txtAdm;
+    private TableView<?> tbvConvertProcess;
     @FXML
-    private Label AdminPass;
+    private TextField txfFielPath;
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }    
+
+    @FXML
+    private void Configeure(ActionEvent event) {
     }
 
     @FXML
-    private void handleAdmin(ActionEvent event) {
+    private void btnFilePath(ActionEvent event) {
     }
 
     @FXML
-    private void handleLogin(ActionEvent event) {
+    private void btnConvert(ActionEvent event) {
     }
-
+    
 }
