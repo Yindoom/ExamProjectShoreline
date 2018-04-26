@@ -11,15 +11,15 @@
 <AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.ConverterViewController">
    <children>
       <ComboBox fx:id="cbmSettings" layoutX="14.0" layoutY="37.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0" />
-      <TableView fx:id="tbvConvertProcess" layoutX="386.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <TableView fx:id="tbvConversions" layoutX="386.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
         <columns>
-          <TableColumn prefWidth="82.0" text="C1" />
-          <TableColumn prefWidth="117.0" text="C2" />
+          <TableColumn fx:id="convertName" prefWidth="82.0" text="C1" />
+          <TableColumn fx:id="convertProgress" prefWidth="117.0" text="C2" />
         </columns>
       </TableView>
-      <Button fx:id="admConfig" layoutX="55.0" layoutY="14.0" mnemonicParsing="false" onAction="#Configeure" prefHeight="25.0" prefWidth="69.0" text="Configure" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="14.0" />
+      <Button fx:id="admConfig" layoutX="55.0" layoutY="14.0" mnemonicParsing="false" onAction="#Configure" prefHeight="25.0" prefWidth="69.0" text="Configure" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="14.0" />
       <Label layoutX="27.0" layoutY="306.0" text="File path :" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="306.0" />
-      <TextField fx:id="txfFielPath" layoutX="71.0" layoutY="302.0" prefHeight="25.0" prefWidth="397.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="302.0" />
+      <TextField fx:id="txtPath" layoutX="71.0" layoutY="302.0" prefHeight="25.0" prefWidth="397.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="302.0" />
       <Button layoutX="486.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnFilePath" text="Browse" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="12.0" />
       <Button layoutX="460.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnConvert" text="Convert" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="20.0" />
    </children>

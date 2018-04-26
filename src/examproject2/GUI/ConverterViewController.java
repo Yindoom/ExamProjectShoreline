@@ -5,6 +5,7 @@
  */
 package examproject2.GUI;
 
+import examproject2.BE.Admin;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -21,15 +23,24 @@ import javafx.scene.control.TextField;
  * @author ZeXVex
  */
 public class ConverterViewController implements Initializable {
+    
+    Model model = Model.getInstance();
+    
+    String currentUser;
 
+    
     @FXML
     private ComboBox<?> cbmSettings;
     @FXML
-    private TableView<?> tbvConvertProcess;
-    @FXML
-    private TextField txfFielPath;
-    @FXML
     private Button admConfig;
+    @FXML
+    private TableView<?> tbvConversions;
+    @FXML
+    private TableColumn<?, ?> convertName;
+    @FXML
+    private TableColumn<?, ?> convertProgress;
+    @FXML
+    private TextField txtPath;
 
     /**
      * Initializes the controller class.
@@ -39,9 +50,6 @@ public class ConverterViewController implements Initializable {
         
     }    
 
-    @FXML
-    private void Configeure(ActionEvent event) {
-    }
 
     @FXML
     private void btnFilePath(ActionEvent event) {
@@ -49,6 +57,19 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) {
+    }
+    
+    @FXML
+    private void Configure(ActionEvent event) {
+    }
+
+    public void setUser(String user) {
+        currentUser = user;
+        admConfig.setVisible(false);
+    }
+
+    void setUser(Admin admin) {
+        currentUser = admin.getName();
     }
     
 }

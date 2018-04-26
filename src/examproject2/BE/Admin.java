@@ -14,18 +14,32 @@ import javafx.beans.property.StringProperty;
  */
 public class Admin {
 
-    private final StringProperty Password = new SimpleStringProperty();
+    private final StringProperty password = new SimpleStringProperty();
+    private final StringProperty name = new SimpleStringProperty();
+
+    public String getName() {
+        return name.get();
+    }
+
+    public void setName(String value) {
+        name.set(value);
+    }
+
+    public StringProperty nameProperty() {
+        return name;
+    }
+    
 
     public String getPassword() {
-        return Password.get();
+        return password.get();
     }
 
     public void setPassword(String value) {
-        Password.set(value);
+        password.set(value);
     }
 
-    public StringProperty PasswordProperty() {
-        return Password;
+    public StringProperty passwordProperty() {
+        return password;
     }
 
 }
