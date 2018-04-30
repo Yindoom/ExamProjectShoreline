@@ -6,6 +6,8 @@
 package examproject2.GUI;
 
 import examproject2.BE.Admin;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,6 +18,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.*;
 
 /**
  * FXML Controller class
@@ -53,10 +58,22 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnFilePath(ActionEvent event) {
+        String Stringpath = null;
+        
+        final FileChooser fileChooser = new FileChooser();
+        
+        File filePath = fileChooser.showOpenDialog(null);
+        if (filePath != null)
+        {
+            Stringpath = filePath.getAbsolutePath();
+        }
+        txtPath.setText(Stringpath);
     }
 
     @FXML
-    private void btnConvert(ActionEvent event) {
+    private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
+        
+        
     }
     
     @FXML
@@ -70,6 +87,17 @@ public class ConverterViewController implements Initializable {
 
     void setUser(Admin admin) {
         currentUser = admin.getName();
+    }
+    public class excelReader  throws IOException, InvalidFormatException{
+       
+        Workbook workbook = WorkbookFactory.create(new File(txtPath.getText()));
+        
+         System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
+
+        System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
+        workbook.forEach(sheet -> {
+            System.out.println("=> " + sheet.getSheetName());
+        });
     }
     
 }
