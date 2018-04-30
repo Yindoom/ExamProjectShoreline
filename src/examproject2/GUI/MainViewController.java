@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,7 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 /**
  *
@@ -58,6 +56,7 @@ public class MainViewController implements Initializable {
         lblName.setText("Please insert username");
     }
 
+    //Nicolai & Bastian
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
         if (!txtAdm.getText().isEmpty()) {
@@ -73,13 +72,14 @@ public class MainViewController implements Initializable {
                 Parent root = fxLoader.load();
                 ConverterViewController cvc = fxLoader.getController();
                 cvc.setUser(admin);
+                
+                            
+                Stage oldStage = (Stage) loginButton.getScene().getWindow();
+                oldStage.close();
 
                 Scene scene = new Scene(root);
                 primaryStage.setScene(scene);
                 primaryStage.showAndWait();
-                
-                Stage oldStage = (Stage) loginButton.getScene().getWindow();
-                oldStage.close();
             }
         } 
         else {
@@ -90,13 +90,14 @@ public class MainViewController implements Initializable {
             Parent root = fxLoader.load();
             ConverterViewController cvc = fxLoader.getController();
             cvc.setUser(txtName.getText());
+            
+                        
+            Stage oldStage = (Stage) loginButton.getScene().getWindow();
+            oldStage.close();
 
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.showAndWait();
-            
-            Stage oldStage = (Stage) loginButton.getScene().getWindow();
-            oldStage.close();
         }
     }
 }

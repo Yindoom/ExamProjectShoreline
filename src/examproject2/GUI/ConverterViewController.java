@@ -11,11 +11,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Popup;
 
 /**
  * FXML Controller class
@@ -57,10 +59,16 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) {
+        //Insert logic
     }
     
     @FXML
     private void Configure(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Please be patient");
+        alert.setHeaderText(currentUser);
+        alert.setContentText("This feature is not available as of yet");
+        alert.show();
     }
 
     public void setUser(String user) {
@@ -68,8 +76,17 @@ public class ConverterViewController implements Initializable {
         admConfig.setVisible(false);
     }
 
-    void setUser(Admin admin) {
+    public void setUser(Admin admin) {
         currentUser = admin.getName();
+    }
+
+    @FXML
+    private void btnActivity(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Wow there pardner");
+        alert.setHeaderText(currentUser);
+        alert.setContentText("You can't do that on TV");
+        alert.show();
     }
     
 }

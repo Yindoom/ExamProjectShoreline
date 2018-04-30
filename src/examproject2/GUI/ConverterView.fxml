@@ -11,7 +11,7 @@
 <AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.ConverterViewController">
    <children>
       <ComboBox fx:id="cbmSettings" layoutX="14.0" layoutY="37.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0" />
-      <TableView fx:id="tbvConversions" layoutX="386.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <TableView fx:id="tbvConversions" layoutX="341.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="45.0">
         <columns>
           <TableColumn fx:id="convertName" prefWidth="82.0" text="C1" />
           <TableColumn fx:id="convertProgress" prefWidth="117.0" text="C2" />
@@ -22,5 +22,6 @@
       <TextField fx:id="txtPath" layoutX="71.0" layoutY="302.0" prefHeight="25.0" prefWidth="397.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="302.0" />
       <Button layoutX="486.0" layoutY="302.0" mnemonicParsing="false" onAction="#btnFilePath" text="Browse" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="12.0" />
       <Button layoutX="460.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnConvert" text="Convert" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="20.0" />
+      <Button layoutX="465.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnActivity" text="Activity" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="7.0" />
    </children>
 </AnchorPane>
