@@ -7,8 +7,10 @@ package examproject2.GUI;
 
 import examproject2.BE.Admin;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +25,8 @@ import javafx.stage.FileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import javafx.stage.Popup;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * FXML Controller class
@@ -74,11 +78,38 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
+        File excel = new File(txtPath.getText());
+        FileInputStream fis = new FileInputStream(excel);
+        XSSFWorkbook book = new XSSFWorkbook(fis);
+        XSSFSheet sheet = book.getSheetAt(0);
         
+        Iterator<Row> itr = sheet.iterator();
         
-    private void btnConvert(ActionEvent event) {
-        //Insert logic
-    }
+        while(itr.hasNext()) {
+            Row row = itr.next();
+            
+                           Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+
+                    Cell cell = cellIterator.next();
+
+                    switch (cell.getCellType()) {
+                    case Cell.CELL_TYPE_STRING:
+                        System.out.print(cell.getStringCellValue() + "\t");
+                        break;
+                    case Cell.CELL_TYPE_NUMERIC:
+                        System.out.print(cell.getNumericCellValue() + "\t");
+                        break;
+                    case Cell.CELL_TYPE_BOOLEAN:
+                        System.out.print(cell.getBooleanCellValue() + "\t");
+                        break;
+                    default:
+
+                    }
+                }
+                System.out.println("");
+            }
+        }
     
     @FXML
     private void Configure(ActionEvent event) {
@@ -97,16 +128,16 @@ public class ConverterViewController implements Initializable {
     public void setUser(Admin admin) {
         currentUser = admin.getName();
     }
-    public class excelReader  throws IOException, InvalidFormatException{
-       
-        Workbook workbook = WorkbookFactory.create(new File(txtPath.getText()));
-        
-         System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
-
-        System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
-        workbook.forEach(sheet -> {
-            System.out.println("=> " + sheet.getSheetName());
-        });
+//    public class excelReader  throws IOException, InvalidFormatException{
+//       
+//        Workbook workbook = WorkbookFactory.create(new File(txtPath.getText()));
+//        
+//         System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
+//
+//        System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
+//        workbook.forEach(sheet -> {
+//            System.out.println("=> " + sheet.getSheetName());
+//        });
 
     @FXML
     private void btnActivity(ActionEvent event) {
