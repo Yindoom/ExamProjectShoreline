@@ -78,37 +78,7 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
-        File excel = new File(txtPath.getText());
-        FileInputStream fis = new FileInputStream(excel);
-        XSSFWorkbook book = new XSSFWorkbook(fis);
-        XSSFSheet sheet = book.getSheetAt(0);
-        
-        Iterator<Row> itr = sheet.iterator();
-        
-        while(itr.hasNext()) {
-            Row row = itr.next();
-            
-                           Iterator<Cell> cellIterator = row.cellIterator();
-                while (cellIterator.hasNext()) {
-
-                    Cell cell = cellIterator.next();
-
-                    switch (cell.getCellType()) {
-                    case Cell.CELL_TYPE_STRING:
-                        System.out.print(cell.getStringCellValue() + "\t");
-                        break;
-                    case Cell.CELL_TYPE_NUMERIC:
-                        System.out.print(cell.getNumericCellValue() + "\t");
-                        break;
-                    case Cell.CELL_TYPE_BOOLEAN:
-                        System.out.print(cell.getBooleanCellValue() + "\t");
-                        break;
-                    default:
-
-                    }
-                }
-                System.out.println("");
-            }
+        model.convert(txtPath.getText());
         }
     
     @FXML
@@ -128,16 +98,6 @@ public class ConverterViewController implements Initializable {
     public void setUser(Admin admin) {
         currentUser = admin.getName();
     }
-//    public class excelReader  throws IOException, InvalidFormatException{
-//       
-//        Workbook workbook = WorkbookFactory.create(new File(txtPath.getText()));
-//        
-//         System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
-//
-//        System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
-//        workbook.forEach(sheet -> {
-//            System.out.println("=> " + sheet.getSheetName());
-//        });
 
     @FXML
     private void btnActivity(ActionEvent event) {
