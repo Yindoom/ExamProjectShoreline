@@ -30,6 +30,7 @@ public class BLLManager {
 
         List<String> headers = new ArrayList();
         List<String> keywords = new ArrayList();
+        List<String> cells = new ArrayList();
 
         List<Integer> colIndex = new ArrayList();
 
@@ -77,28 +78,37 @@ public class BLLManager {
                         }
                     }
                 }
-            }
+            
             System.out.println(colIndex);
-//                    obj.put("test", cell);
-//                    switch (cell.getCellType()) {
-//                    case Cell.CELL_TYPE_STRING:
-//                        System.out.print(cell.getStringCellValue() + "\t");
-//                        break;
-//                    case Cell.CELL_TYPE_NUMERIC:
-//                        System.out.print(cell.getNumericCellValue() + "\t");
-//                        break;
-//                    case Cell.CELL_TYPE_BOOLEAN:
-//                        System.out.print(cell.getBooleanCellValue() + "\t");
-//                        break;
-//                    default:
+                  
+         if (row.getRowNum() != 0) {
+             for (int index : colIndex) 
+                 if (index == cell.getColumnIndex())
+                      switch (cell.getCellType()) { 
+                          case Cell.CELL_TYPE_STRING:
+                              obj.put(cell.getColumnIndex(),cell.getStringCellValue());
+                              break;
+                          case Cell.CELL_TYPE_NUMERIC:
+                              obj.put(cell.getColumnIndex(), cell.getNumericCellValue());
+                              break;
+                          default:
+                      }
+                     }
+ 
+       
+         
+         
+            
+
 
         }
     }
-//                try (FileWriter file = new FileWriter("C:\\Users\\Yindo\\Desktop\\test.json")) {
-//                   file.write(obj.toJSONString());
-//                   file.flush();
+             try (FileWriter file = new FileWriter("C:\\Users\\Emil Pc\\Desktop\\test.json")) {
+                file.write(obj.toJSONString());
+                file.flush();
+             }
 
-}
-//    }
-//
-//}
+}}
+   
+
+
