@@ -27,47 +27,58 @@ import org.json.simple.JSONObject;
 public class BLLManager {
 
     public void convert(String text) throws FileNotFoundException, IOException {
+
+        List<String> headers = new ArrayList();
         List<String> keywords = new ArrayList();
-        
+
         List<Integer> colIndex = new ArrayList();
-        
+
         keywords.add("Order Type");
         keywords.add("System Status");
         keywords.add("Opr. short text");
         keywords.add("priority");
-        
+        keywords.add("priority1");
+
         JSONObject obj = new JSONObject();
         File excel = new File(text);
         FileInputStream fis = new FileInputStream(excel);
         XSSFWorkbook book = new XSSFWorkbook(fis);
         XSSFSheet sheet = book.getSheetAt(0);
-        
-        Iterator<Row> itr = sheet.iterator();
-        
-        
-        while(itr.hasNext()) {
-            Row row = itr.next();
-            
-            Iterator<Cell> cellIterator = row.cellIterator(); 
-            if(row.getRowNum() == 0) {
-                
-                for (String key : keywords) {
-                int n = 0;
-                
-                while (cellIterator.hasNext()) {
 
-                    Cell cell = cellIterator.next();
-                    
-                            if(cell.getStringCellValue().toLowerCase().equals(key.toLowerCase())) {
-                                if(n != 0) 
-                                    cell.setCellValue(cell.getStringCellValue()+n);
-                                if(cell.getStringCellValue().toLowerCase().contains(key.toLowerCase()))
-                                colIndex.add(cell.getColumnIndex());
-                                n++;
+        Iterator<Row> itr = sheet.iterator();
+
+        while (itr.hasNext()) {
+            Row row = itr.next();
+
+            Iterator<Cell> cellIterator = row.cellIterator();
+
+            while (cellIterator.hasNext()) {
+
+                Cell cell = cellIterator.next();
+
+                if (row.getRowNum() == 0) {
+
+                    String cellValue = cell.getStringCellValue();
+
+                    for (String key : keywords) {
+                        int n = 0;
+                        if (cellValue.toLowerCase().equals(key.toLowerCase())) {
+                            for (String header : headers) {
+                                if (header.toLowerCase().equals(cellValue.toLowerCase())) {
+                                    n++;
+                                }
                             }
+                            if(n != 0)
+                            cellValue = cellValue + n;
+                        }
+                        if (cellValue.toLowerCase().equals(key.toLowerCase())) {
+                            colIndex.add(cell.getColumnIndex());
+                            headers.add(cellValue);
                         }
                     }
-                    System.out.println(colIndex);
+                }
+            }
+            System.out.println(colIndex);
 //                    obj.put("test", cell);
 //                    switch (cell.getCellType()) {
 //                    case Cell.CELL_TYPE_STRING:
@@ -81,14 +92,13 @@ public class BLLManager {
 //                        break;
 //                    default:
 
-                    }
-                }
+        }
+    }
 //                try (FileWriter file = new FileWriter("C:\\Users\\Yindo\\Desktop\\test.json")) {
 //                   file.write(obj.toJSONString());
 //                   file.flush();
-                }
-                //System.out.println("");
-           // }
-    //}
-    
+
 }
+//    }
+//
+//}
