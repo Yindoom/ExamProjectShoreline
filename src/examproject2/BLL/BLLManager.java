@@ -48,16 +48,23 @@ public class BLLManager {
         while(itr.hasNext()) {
             Row row = itr.next();
             
-            Iterator<Cell> cellIterator = row.cellIterator();
-            
+            Iterator<Cell> cellIterator = row.cellIterator(); 
+            if(row.getRowNum() == 0) {
+                
+                for (String key : keywords) {
+                int n = 0;
+                
                 while (cellIterator.hasNext()) {
 
                     Cell cell = cellIterator.next();
                     
-                    if(row.getRowNum() == 0) {
-                        for (String key : keywords) {
-                            if(cell.getStringCellValue().toLowerCase().contains(key.toLowerCase()))
+                            if(cell.getStringCellValue().toLowerCase().equals(key.toLowerCase())) {
+                                if(n != 0) 
+                                    cell.setCellValue(cell.getStringCellValue()+n);
+                                if(cell.getStringCellValue().toLowerCase().contains(key.toLowerCase()))
                                 colIndex.add(cell.getColumnIndex());
+                                n++;
+                            }
                         }
                     }
                     System.out.println(colIndex);
