@@ -31,7 +31,7 @@ public class BLLManager {
         List<String> headers = new ArrayList();
         List<String> keywords = new ArrayList();
         List<String> cells = new ArrayList();
-        JSONObject obj = new JSONObject();
+        //JSONObject obj = new JSONObject();
         List<Integer> colIndex = new ArrayList();
 
         keywords.add("Order Type");
@@ -50,6 +50,7 @@ public class BLLManager {
         Iterator<Row> itr = sheet.iterator();
 
         while (itr.hasNext()) {
+            JSONObject obj = new JSONObject();
             Row row = itr.next();
 
             
@@ -82,7 +83,7 @@ public class BLLManager {
                     }
                 }
                 
-
+                
                 //  System.out.println(colIndex);
                 if (row.getRowNum() != 0) {
                     for (int index : colIndex) {
@@ -105,10 +106,11 @@ public class BLLManager {
                 }
               
             }
+            if(row.getRowNum() != 0)
         myJSONObjects.add(obj);    
         }
         for (int i = 0; i < myJSONObjects.size(); i++) {
-            try (FileWriter file = new FileWriter("C:\\Users\\Emil Pc\\Desktop\\obj\\test"+ i+".json")) {
+            try (FileWriter file = new FileWriter("C:\\Users\\Yindo\\Desktop\\obj\\test"+ i+".json")) {
             file.write(myJSONObjects.get(i).toJSONString());
             file.flush();}
             
