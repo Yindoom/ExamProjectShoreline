@@ -31,7 +31,7 @@ public class BLLManager {
         List<String> headers = new ArrayList();
         List<String> keywords = new ArrayList();
         List<String> cells = new ArrayList();
-
+        JSONObject obj = new JSONObject();
         List<Integer> colIndex = new ArrayList();
 
         keywords.add("Order Type");
@@ -39,8 +39,9 @@ public class BLLManager {
         keywords.add("Opr. short text");
         keywords.add("priority");
         keywords.add("priority1");
-
-        JSONObject obj = new JSONObject();
+        
+        
+        List<JSONObject> myJSONObjects = new ArrayList();
         File excel = new File(text);
         FileInputStream fis = new FileInputStream(excel);
         XSSFWorkbook book = new XSSFWorkbook(fis);
@@ -51,6 +52,7 @@ public class BLLManager {
         while (itr.hasNext()) {
             Row row = itr.next();
 
+            
             Iterator<Cell> cellIterator = row.cellIterator();
 
             while (cellIterator.hasNext()) {
@@ -69,8 +71,9 @@ public class BLLManager {
                                     n++;
                                 }
                             }
-                            if(n != 0)
-                            cellValue = cellValue + n;
+                            if (n != 0) {
+                                cellValue = cellValue + n;
+                            }
                         }
                         if (cellValue.toLowerCase().equals(key.toLowerCase())) {
                             colIndex.add(cell.getColumnIndex());
@@ -78,37 +81,38 @@ public class BLLManager {
                         }
                     }
                 }
-            
-            System.out.println(colIndex);
-                  
-         if (row.getRowNum() != 0) {
-             for (int index : colIndex) 
-                 if (index == cell.getColumnIndex())
-                      switch (cell.getCellType()) { 
-                          case Cell.CELL_TYPE_STRING:
-                              obj.put(cell.getColumnIndex(),cell.getStringCellValue());
-                              break;
-                          case Cell.CELL_TYPE_NUMERIC:
-                              obj.put(cell.getColumnIndex(), cell.getNumericCellValue());
-                              break;
-                          default:
-                      }
-                     }
- 
-       
-         
-         
-            
+                
 
-
+                //  System.out.println(colIndex);
+                if (row.getRowNum() != 0) {
+                    for (int index : colIndex) {
+                        if (index == cell.getColumnIndex()) {
+                           
+                            switch (cell.getCellType()) {
+                                case Cell.CELL_TYPE_STRING:
+                                    System.out.println(cell.getStringCellValue());
+                                    obj.put(cell.getColumnIndex(), cell.getStringCellValue());
+                                    break;
+                                case Cell.CELL_TYPE_NUMERIC:
+                                    System.out.println(cell.getNumericCellValue());
+                                    obj.put(cell.getColumnIndex(), cell.getNumericCellValue());
+                                    break;
+                                default:
+                        
+                            }
+                        }
+                    }
+                }
+              
+            }
+        myJSONObjects.add(obj);    
         }
+        for (int i = 0; i < myJSONObjects.size(); i++) {
+            try (FileWriter file = new FileWriter("C:\\Users\\Emil Pc\\Desktop\\obj\\test"+ i+".json")) {
+            file.write(myJSONObjects.get(i).toJSONString());
+            file.flush();}
+            
+        }
+
     }
-             try (FileWriter file = new FileWriter("C:\\Users\\Emil Pc\\Desktop\\test.json")) {
-                file.write(obj.toJSONString());
-                file.flush();
-             }
-
-}}
-   
-
-
+}
