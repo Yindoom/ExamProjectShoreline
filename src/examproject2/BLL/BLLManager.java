@@ -5,7 +5,9 @@
  */
 package examproject2.BLL;
 
+import examproject2.BE.Config;
 import static examproject2.BLL.Converter.filetype.xlsx;
+import examproject2.DAL.DALManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,8 +30,10 @@ import org.json.simple.JSONObject;
 public class BLLManager {
     
     Converter convert = new Converter();
+    DALManager dal = new DALManager();
+    List<Config> config = new ArrayList(dal.getConfig());
     
     public void convert(String text) throws IOException {
-        convert.convert(text, xlsx);
+        convert.convert(text, xlsx, config);
     }
 }

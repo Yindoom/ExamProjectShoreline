@@ -5,11 +5,15 @@
         <group>
             <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/BE/Admin.java</file>
             <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/BE/Conversions.java</file>
+            <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/BE/Config.java</file>
+            <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/DAL/FileDAO.java</file>
             <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/GUI/Model.java</file>
             <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/GUI/MainViewController.java</file>
             <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/GUI/ConverterViewController.java</file>
+            <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/BLL/BLLManager.java</file>
+            <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/BLL/Converter.java</file>
             <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/GUI/AdminSettingsViewController.java</file>
-            <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/nbproject/jfx-impl.xml</file>
+            <file>file:/C:/Users/Yindo/Desktop/COmpulsoryu%204/ExamProject2/ExamProjectShoreline/src/examproject2/DAL/DatabaseDAO.java</file>
         </group>
     </open-files>
 </project-private>

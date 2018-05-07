@@ -11,38 +11,11 @@ package examproject2.BE;
  */
 public class Config {
 
-    private String dataType;
     private String keyWord;
     private String jsonAttribute;
     private int columnIndex;
-    private String stringData;
-    private int intData;
-
     
-    public int getIntData() {
-        return intData;
-    }
-
-    public void setIntData(int intData) {
-        this.intData = intData;
-    }
-
-    public String getStringData() {
-        return stringData;
-    }
-
-    public void setStringData(String stringData) {
-        this.stringData = stringData;
-    }
-
-    public String getDataType() {
-        return dataType;
-    }
-
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
-    }
-
+    
     public int getColumnIndex() {
         return columnIndex;
     }
