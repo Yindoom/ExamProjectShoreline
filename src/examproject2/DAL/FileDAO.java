@@ -39,7 +39,6 @@ public class FileDAO {
         return sheet.iterator();
     }
 
-
     public void write(JSONArray jsonFiles) throws IOException {
 
         try (FileWriter file = new FileWriter("C:\\Users\\Yindo\\Desktop\\obj\\test.json")) {
@@ -48,12 +47,4 @@ public class FileDAO {
         }
     }
 
-    public Iterator getXml(String text) throws SAXException, IOException, ParserConfigurationException {
-         File xml = new File(text);
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(xml);
-        
-        return getXml(text);
-    }
 }

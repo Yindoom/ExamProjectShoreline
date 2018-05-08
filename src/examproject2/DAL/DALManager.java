@@ -37,8 +37,5 @@ public class DALManager {
         file.write(jsonFiles);
     }
 
-    public Iterator<Row> getXml(String text) throws SAXException, IOException, ParserConfigurationException {
-        return file.getXml(text);
-    }
     
 }

@@ -26,7 +26,6 @@ public class BLLManager {
        
         List<Config> config = new ArrayList(dal.getConfig());
         convert.convert(dal.getIterator(text), xlsx, config);
-        convert.convert(dal.getXml(text), xml, config);
         dal.write(convert.myJSONObjects);
     }
 }
