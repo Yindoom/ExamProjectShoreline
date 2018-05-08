@@ -14,8 +14,34 @@ public class Config {
     private String keyWord;
     private String jsonAttribute;
     private int columnIndex;
-    
-    
+    private String secondaryKeyWord;
+    private String defaultValue;
+    private int secondaryIndex;
+
+    public int getSecondaryIndex() {
+        return secondaryIndex;
+    }
+
+    public void setSecondaryIndex(int secondaryIndex) {
+        this.secondaryIndex = secondaryIndex;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    public String getSecondaryKeyWord() {
+        return secondaryKeyWord;
+    }
+
+    public void setSecondaryKeyWord(String secondaryKeyWord) {
+        this.secondaryKeyWord = secondaryKeyWord;
+    }
+
     public int getColumnIndex() {
         return columnIndex;
     }
