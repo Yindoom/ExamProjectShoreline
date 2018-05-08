@@ -6,8 +6,12 @@
 package examproject2.DAL;
 
 import examproject2.BE.Config;
+import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import org.apache.poi.ss.usermodel.Row;
+import org.json.JSONArray;
 
 /**
  *
@@ -16,9 +20,18 @@ import java.util.List;
 public class DALManager {
     
     DatabaseDAO db = new DatabaseDAO();
+    FileDAO file = new FileDAO();
 
     public List<Config> getConfig() {
         return db.getKeyWords();
+    }
+    
+    public Iterator<Row> getIterator(String text) throws IOException {
+        return file.getIterator(text);
+    }
+
+    public void write(JSONArray jsonFiles) throws IOException {
+        file.write(jsonFiles);
     }
     
 }
