@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
+import static org.apache.poi.ss.usermodel.CellType.BLANK;
+import static org.apache.poi.ss.usermodel.CellType.STRING;
 import org.apache.poi.ss.usermodel.Row;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,6 +33,7 @@ public class Converter {
     List<Header> headers = new ArrayList();
     List<Config> keys;
     JSONArray myJSONObjects = new JSONArray();
+    List<Config> secondary;
 
     public enum filetype {
         xlsx,
@@ -42,6 +45,9 @@ public class Converter {
         keys = config;
 
         while (itr.hasNext()) {
+
+            secondary = new ArrayList();
+
             JSONObject obj = new JSONObject();
             JSONObject planning = new JSONObject();
             Row row = itr.next();
@@ -64,7 +70,16 @@ public class Converter {
                     addToJson(obj, planning, cell);
                 }
             }
+            Iterator<Cell> secondIterator = row.cellIterator();
+
+            while (secondIterator.hasNext()) {
+                Cell cell = secondIterator.next();
+                secondaryAddToJson(obj, planning, cell);
+            }
             if (row.getRowNum() != 0) {
+                obj.put("assetSerialNumber", "asset.id");
+                obj.put("siteName", "");
+                obj.put("createdBy", "SAP");
                 obj.put("createdOn", LocalDate.now());
                 obj.put("Planning", planning);
                 myJSONObjects.put(obj);
@@ -77,8 +92,15 @@ public class Converter {
     private void setIndex() {
         for (Header header : headers) {
             for (Config key : keys) {
-                if (header.getValue().toLowerCase().trim().contains(key.getKeyWord().toLowerCase().trim())) {
-                    key.setColumnIndex(header.getIndex());
+                if (key.getKeyWord() != null) {
+                    if (header.getValue().toLowerCase().trim().contains(key.getKeyWord().toLowerCase().trim())) {
+                        key.setColumnIndex(header.getIndex());
+                    }
+                }
+                if (key.getSecondaryKeyWord() != null) {
+                    if (header.getValue().toLowerCase().trim().contains(key.getSecondaryKeyWord().toLowerCase().trim())) {
+                        key.setSecondaryIndex(header.getIndex());
+                    }
                 }
             }
         }
@@ -101,22 +123,81 @@ public class Converter {
 
     private void addToJson(JSONObject obj, JSONObject planning, Cell cell) {
         for (Config index : keys) {
+            if (index.getKeyWord() == null) {
+                secondary.add(index);
+            }
             if (index.getColumnIndex() == cell.getColumnIndex()) {
                 if (index.getJsonAttribute().toLowerCase().contains("date")) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    planning.put(index.getJsonAttribute(), sdf.format(cell.getDateCellValue()));
+                    if (cell.getCellTypeEnum() == STRING) {
+                        if (cell.getStringCellValue().isEmpty()) {
+                            secondary.add(index);
+                        }
+                    } else {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        planning.put(index.getJsonAttribute(), sdf.format(cell.getDateCellValue()));
+                    }
                 } else if (index.getJsonAttribute().toLowerCase().contains("time")) {
-                    planning.put(index.getJsonAttribute(), cell.getNumericCellValue());
+                    if (cell.getCellTypeEnum() == STRING) {
+                        if (cell.getStringCellValue().isEmpty()) {
+                            secondary.add(index);
+                        }
+                    } else {
+                        planning.put(index.getJsonAttribute(), cell.getNumericCellValue());
+                    }
                 } else {
                     switch (cell.getCellTypeEnum()) {
                         case STRING:
+                            if (cell.getStringCellValue().isEmpty()) {
+                                secondary.add(index);
+                            }
+                            else
                             obj.put(index.getJsonAttribute(), cell.getStringCellValue());
                             break;
                         case NUMERIC:
                             obj.put(index.getJsonAttribute(), cell.getNumericCellValue());
                             break;
-                        case _NONE:
 
+                        default:
+
+                    }
+                }
+            }
+        }
+    }
+
+    private void secondaryAddToJson(JSONObject obj, JSONObject planning, Cell cell) {
+        for (Config index : secondary) {
+            if (index.getSecondaryKeyWord() == null) {
+                obj.put(index.getJsonAttribute(), index.getDefaultValue());
+            }
+            if (index.getSecondaryIndex() == cell.getColumnIndex()) {
+                if (index.getJsonAttribute().toLowerCase().contains("date")) {
+                    if (cell.getCellTypeEnum() == STRING) {
+                        if (cell.getStringCellValue().isEmpty()) {
+                            planning.put(index.getJsonAttribute(), index.getDefaultValue());
+                        }
+                    } else {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        planning.put(index.getJsonAttribute(), sdf.format(cell.getDateCellValue()));
+                    }
+                } else if (index.getJsonAttribute().toLowerCase().contains("time")) {
+                    if (cell.getStringCellValue().isEmpty()) {
+                        planning.put(index.getJsonAttribute(), index.getDefaultValue());
+                    } else {
+                        planning.put(index.getJsonAttribute(), cell.getNumericCellValue());
+                    }
+                } else {
+                    switch (cell.getCellTypeEnum()) {
+                        case STRING:
+                            if (cell.getStringCellValue().isEmpty()) {
+                                obj.put(index.getJsonAttribute(), index.getDefaultValue());
+                            } else {
+                                obj.put(index.getJsonAttribute(), cell.getStringCellValue());
+                            }
+                            break;
+                        case NUMERIC:
+                            obj.put(index.getJsonAttribute(), cell.getNumericCellValue());
+                            break;
                         default:
 
                     }
