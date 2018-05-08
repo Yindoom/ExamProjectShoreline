@@ -12,11 +12,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
 /**
  *
  * @author Yindo
@@ -33,11 +39,21 @@ public class FileDAO {
         return sheet.iterator();
     }
 
+
     public void write(JSONArray jsonFiles) throws IOException {
-        
+
         try (FileWriter file = new FileWriter("C:\\Users\\Yindo\\Desktop\\obj\\test.json")) {
             file.write(jsonFiles.toString(4));
             file.flush();
         }
+    }
+
+    public Iterator getXml(String text) throws SAXException, IOException, ParserConfigurationException {
+         File xml = new File(text);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(xml);
+        
+        return getXml(text);
     }
 }

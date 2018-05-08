@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import javax.xml.parsers.ParserConfigurationException;
 import org.apache.poi.ss.usermodel.Row;
 import org.json.JSONArray;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -29,9 +31,14 @@ public class DALManager {
     public Iterator<Row> getIterator(String text) throws IOException {
         return file.getIterator(text);
     }
+    
 
     public void write(JSONArray jsonFiles) throws IOException {
         file.write(jsonFiles);
+    }
+
+    public Iterator<Row> getXml(String text) throws SAXException, IOException, ParserConfigurationException {
+        return file.getXml(text);
     }
     
 }
