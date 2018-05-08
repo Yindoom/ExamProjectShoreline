@@ -33,10 +33,8 @@ public class DatabaseDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Config config = new Config();
-                config.setJsonAttribute(rs.getString("jsonAttribute"));
-                config.setDefaultValue(rs.getString("defaultvalue"));
-                config.setSecondaryKeyWord(rs.getString("secondarykeyword"));
-                config.setKeyWord(rs.getString("keyword"));
+                config.setJsonAttribute(rs.getString("jsonAttribute".trim()));
+                config.setKeyWord(rs.getString("keyword".trim()));
                 configs.add(config);
                 config.getJsonAttribute();
                 config.getKeyWord();
