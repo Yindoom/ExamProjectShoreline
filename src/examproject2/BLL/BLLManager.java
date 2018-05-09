@@ -6,8 +6,8 @@
 package examproject2.BLL;
 
 import examproject2.BE.Config;
+import examproject2.BE.Key;
 import static examproject2.BLL.Converter.filetype.xlsx;
-import static examproject2.BLL.Converter.filetype.xml;
 import examproject2.DAL.DALManager;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public class BLLManager {
 
     Converter convert = new Converter();
     DALManager dal = new DALManager();
+<<<<<<< HEAD
 
     public void convert(String text) throws IOException {
 
@@ -35,5 +36,22 @@ public class BLLManager {
         int i = nameArray.length -1;
         return nameArray[i];
 
+=======
+    
+    public void convert(String text, Config con) throws IOException {
+       
+        List<Key> config = new ArrayList(dal.getConfig(con));
+        convert.convert(dal.getIterator(text), xlsx, config);
+        dal.write(convert.myJSONObjects);
+    public void convert(String file, String path) throws IOException {
+       
+        List<Config> config = new ArrayList(dal.getConfig());
+        convert.convert(dal.getIterator(file), xlsx, config);
+        dal.write(convert.myJSONObjects, path);
+    }
+
+    public List<Config> getConfigs() {
+        return dal.getAllConfigs();
+>>>>>>> fc4767f8b0ed663ec346d3caf5650d9cb254cff5
     }
 }

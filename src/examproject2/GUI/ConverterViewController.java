@@ -6,6 +6,7 @@
 package examproject2.GUI;
 
 import examproject2.BE.Admin;
+import examproject2.BE.Config;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -35,7 +37,7 @@ public class ConverterViewController implements Initializable {
     String currentUser;
 
     @FXML
-    private ComboBox<?> cbmSettings;
+    private ComboBox<Config> cbmSettings;
     @FXML
     private Button admConfig;
     @FXML
@@ -46,12 +48,18 @@ public class ConverterViewController implements Initializable {
     private TableColumn<?, ?> convertProgress;
     @FXML
     private TextField txtPath;
+    @FXML
+    private TextField txtSavePath;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+<<<<<<< HEAD
+=======
+        setConfigs();
+>>>>>>> fc4767f8b0ed663ec346d3caf5650d9cb254cff5
 
     }
 
@@ -70,9 +78,19 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
+<<<<<<< HEAD
         model.convert(txtPath.getText());
     }
 
+=======
+        model.convert(txtPath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
+    }
+
+        
+        model.convert(txtPath.getText(),txtSavePath.getText());
+        }
+    
+>>>>>>> fc4767f8b0ed663ec346d3caf5650d9cb254cff5
     @FXML
     private void Configure(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -94,10 +112,33 @@ public class ConverterViewController implements Initializable {
     @FXML
     private void btnActivity(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Wow there pardner");
+        alert.setTitle("Sorry");
         alert.setHeaderText(currentUser);
-        alert.setContentText("You can't do that on TV");
+        alert.setContentText("This window has not been implemented yet. \t Thank you for your patience.");
         alert.show();
     }
 
+<<<<<<< HEAD
+=======
+    private void setConfigs() {
+        cbmSettings.getItems().setAll(model.getConfigs());
+    }
+
+    @FXML
+    private void btnFilePathSave(ActionEvent event) {
+                String Stringpath = null;
+        
+        final DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(null);
+
+
+        
+        if (selectedDirectory != null)
+        {
+            Stringpath = selectedDirectory.getAbsolutePath();
+        }
+        txtSavePath.setText(Stringpath);
+    }
+    
+>>>>>>> fc4767f8b0ed663ec346d3caf5650d9cb254cff5
 }

@@ -5,23 +5,17 @@
  */
 package examproject2.DAL;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.List;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
-import org.json.JSONObject;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -39,9 +33,15 @@ public class FileDAO {
         return sheet.iterator();
     }
 
+<<<<<<< HEAD
     public void write(JSONArray jsonFiles, String name) throws IOException {
 
         try (FileWriter file = new FileWriter("C:\\Users\\ZeXVex\\Desktop\\Shoreline\\Test\\"+name+".json")) {
+=======
+    public void write(JSONArray jsonFiles, String path) throws IOException {
+        
+        try (FileWriter file = new FileWriter(path + "\\test.json")) {
+>>>>>>> fc4767f8b0ed663ec346d3caf5650d9cb254cff5
             file.write(jsonFiles.toString(4));
             file.flush();
         }

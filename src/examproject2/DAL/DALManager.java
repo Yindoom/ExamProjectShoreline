@@ -6,6 +6,7 @@
 package examproject2.DAL;
 
 import examproject2.BE.Config;
+import examproject2.BE.Key;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -24,17 +25,26 @@ public class DALManager {
     DatabaseDAO db = new DatabaseDAO();
     FileDAO file = new FileDAO();
 
-    public List<Config> getConfig() {
-        return db.getKeyWords();
+    public List<Key> getConfig(Config config) {
+        return db.getKeyWords(config);
     }
     
-    public Iterator<Row> getIterator(String text) throws IOException {
-        return file.getIterator(text);
+    public Iterator<Row> getIterator(String filepath) throws IOException {
+        return file.getIterator(filepath);
     }
     
 
+<<<<<<< HEAD
     public void write(JSONArray jsonFiles, String name) throws IOException {
         file.write(jsonFiles, name);
+=======
+    public void write(JSONArray jsonFiles, String path) throws IOException {
+        file.write(jsonFiles, path);
+    }
+
+    public List<Config> getAllConfigs() {
+        return db.getConfigs();
+>>>>>>> fc4767f8b0ed663ec346d3caf5650d9cb254cff5
     }
 
     
