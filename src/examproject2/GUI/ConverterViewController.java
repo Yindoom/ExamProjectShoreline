@@ -19,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -46,6 +47,8 @@ public class ConverterViewController implements Initializable {
     private TableColumn<?, ?> convertProgress;
     @FXML
     private TextField txtPath;
+    @FXML
+    private TextField txtSavePath;
 
     /**
      * Initializes the controller class.
@@ -72,7 +75,8 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
-        model.convert(txtPath.getText());
+        
+        model.convert(txtPath.getText(),txtSavePath.getText());
         }
     
     @FXML
@@ -100,6 +104,22 @@ public class ConverterViewController implements Initializable {
         alert.setHeaderText(currentUser);
         alert.setContentText("You can't do that on TV");
         alert.show();
+    }
+
+    @FXML
+    private void btnFilePathSave(ActionEvent event) {
+                String Stringpath = null;
+        
+        final DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(null);
+
+
+        
+        if (selectedDirectory != null)
+        {
+            Stringpath = selectedDirectory.getAbsolutePath();
+        }
+        txtSavePath.setText(Stringpath);
     }
     
 }

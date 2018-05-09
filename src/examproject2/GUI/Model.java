@@ -23,8 +23,8 @@ public class Model {
         return ModelHolder.INSTANCE;
     }
 
-    void convert(String text) throws IOException {
-        bll.convert(text);
+    void convert(String file, String path) throws IOException {
+        bll.convert(file, path);
     }
     
     private static class ModelHolder {

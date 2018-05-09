@@ -22,10 +22,10 @@ public class BLLManager {
     Converter convert = new Converter();
     DALManager dal = new DALManager();
     
-    public void convert(String text) throws IOException {
+    public void convert(String file, String path) throws IOException {
        
         List<Config> config = new ArrayList(dal.getConfig());
-        convert.convert(dal.getIterator(text), xlsx, config);
-        dal.write(convert.myJSONObjects);
+        convert.convert(dal.getIterator(file), xlsx, config);
+        dal.write(convert.myJSONObjects, path);
     }
 }
