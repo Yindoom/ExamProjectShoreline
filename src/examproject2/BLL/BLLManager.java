@@ -27,6 +27,11 @@ public class BLLManager {
         List<Key> config = new ArrayList(dal.getConfig(con));
         convert.convert(dal.getIterator(text), xlsx, config);
         dal.write(convert.myJSONObjects);
+    public void convert(String file, String path) throws IOException {
+       
+        List<Config> config = new ArrayList(dal.getConfig());
+        convert.convert(dal.getIterator(file), xlsx, config);
+        dal.write(convert.myJSONObjects, path);
     }
 
     public List<Config> getConfigs() {

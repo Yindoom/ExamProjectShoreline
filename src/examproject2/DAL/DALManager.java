@@ -29,13 +29,13 @@ public class DALManager {
         return db.getKeyWords(config);
     }
     
-    public Iterator<Row> getIterator(String text) throws IOException {
-        return file.getIterator(text);
+    public Iterator<Row> getIterator(String filepath) throws IOException {
+        return file.getIterator(filepath);
     }
     
 
-    public void write(JSONArray jsonFiles) throws IOException {
-        file.write(jsonFiles);
+    public void write(JSONArray jsonFiles, String path) throws IOException {
+        file.write(jsonFiles, path);
     }
 
     public List<Config> getAllConfigs() {

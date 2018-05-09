@@ -31,6 +31,8 @@ public class Model {
 
     List<Config> getConfigs() {
         return bll.getConfigs();
+    void convert(String file, String path) throws IOException {
+        bll.convert(file, path);
     }
     
     private static class ModelHolder {
