@@ -9,6 +9,7 @@ import examproject2.BE.Admin;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,12 +29,11 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
  * @author ZeXVex
  */
 public class ConverterViewController implements Initializable {
-    
+
     Model model = Model.getInstance();
-    
+
     String currentUser;
 
-    
     @FXML
     private ComboBox<?> cbmSettings;
     @FXML
@@ -52,19 +52,17 @@ public class ConverterViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
 
+    }
 
     @FXML
     private void btnFilePath(ActionEvent event) {
         String Stringpath = null;
-        
+
         final FileChooser fileChooser = new FileChooser();
-        
+
         File filePath = fileChooser.showOpenDialog(null);
-        if (filePath != null)
-        {
+        if (filePath != null) {
             Stringpath = filePath.getAbsolutePath();
         }
         txtPath.setText(Stringpath);
@@ -73,8 +71,8 @@ public class ConverterViewController implements Initializable {
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
         model.convert(txtPath.getText());
-        }
-    
+    }
+
     @FXML
     private void Configure(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -101,5 +99,5 @@ public class ConverterViewController implements Initializable {
         alert.setContentText("You can't do that on TV");
         alert.show();
     }
-    
+
 }

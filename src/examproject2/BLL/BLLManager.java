@@ -11,6 +11,7 @@ import static examproject2.BLL.Converter.filetype.xml;
 import examproject2.DAL.DALManager;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,14 +19,21 @@ import java.util.List;
  * @author Yindo
  */
 public class BLLManager {
-    
+
     Converter convert = new Converter();
     DALManager dal = new DALManager();
-    
+
     public void convert(String text) throws IOException {
-       
+
         List<Config> config = new ArrayList(dal.getConfig());
         convert.convert(dal.getIterator(text), xlsx, config);
-        dal.write(convert.myJSONObjects);
+        dal.write(convert.myJSONObjects, getName(text));
+    }
+
+    private String getName(String text) {
+        String[] nameArray = text.split(".");
+        int i = nameArray.length -1;
+        return nameArray[i];
+
     }
 }

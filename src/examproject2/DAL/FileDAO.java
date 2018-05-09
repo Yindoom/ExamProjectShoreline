@@ -39,9 +39,9 @@ public class FileDAO {
         return sheet.iterator();
     }
 
-    public void write(JSONArray jsonFiles) throws IOException {
+    public void write(JSONArray jsonFiles, String name) throws IOException {
 
-        try (FileWriter file = new FileWriter("C:\\Users\\Yindo\\Desktop\\obj\\test.json")) {
+        try (FileWriter file = new FileWriter("C:\\Users\\ZeXVex\\Desktop\\Shoreline\\Test\\"+name+".json")) {
             file.write(jsonFiles.toString(4));
             file.flush();
         }

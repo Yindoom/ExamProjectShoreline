@@ -33,8 +33,8 @@ public class DALManager {
     }
     
 
-    public void write(JSONArray jsonFiles) throws IOException {
-        file.write(jsonFiles);
+    public void write(JSONArray jsonFiles, String name) throws IOException {
+        file.write(jsonFiles, name);
     }
 
     

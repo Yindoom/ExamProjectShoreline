@@ -23,7 +23,7 @@ public class Model {
         return ModelHolder.INSTANCE;
     }
 
-    void convert(String text) throws IOException {
+    public void convert(String text) throws IOException {
         bll.convert(text);
     }
     
