@@ -6,6 +6,7 @@
 package examproject2.GUI;
 
 import examproject2.BE.Admin;
+import examproject2.BE.Config;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -28,14 +29,13 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
  * @author ZeXVex
  */
 public class ConverterViewController implements Initializable {
-    
+
     Model model = Model.getInstance();
-    
+
     String currentUser;
 
-    
     @FXML
-    private ComboBox<?> cbmSettings;
+    private ComboBox<Config> cbmSettings;
     @FXML
     private Button admConfig;
     @FXML
@@ -52,19 +52,18 @@ public class ConverterViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
+        setConfigs();
 
+    }
 
     @FXML
     private void btnFilePath(ActionEvent event) {
         String Stringpath = null;
-        
+
         final FileChooser fileChooser = new FileChooser();
-        
+
         File filePath = fileChooser.showOpenDialog(null);
-        if (filePath != null)
-        {
+        if (filePath != null) {
             Stringpath = filePath.getAbsolutePath();
         }
         txtPath.setText(Stringpath);
@@ -72,9 +71,9 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
-        model.convert(txtPath.getText());
-        }
-    
+        model.convert(txtPath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
+    }
+
     @FXML
     private void Configure(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -96,10 +95,14 @@ public class ConverterViewController implements Initializable {
     @FXML
     private void btnActivity(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Wow there pardner");
+        alert.setTitle("Sorry");
         alert.setHeaderText(currentUser);
-        alert.setContentText("You can't do that on TV");
+        alert.setContentText("This window has not been implemented yet. \t Thank you for your patience.");
         alert.show();
     }
-    
+
+    private void setConfigs() {
+        cbmSettings.getItems().setAll(model.getConfigs());
+    }
+
 }

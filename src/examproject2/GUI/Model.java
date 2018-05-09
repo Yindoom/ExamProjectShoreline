@@ -5,8 +5,10 @@
  */
 package examproject2.GUI;
 
+import examproject2.BE.Config;
 import examproject2.BLL.BLLManager;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -23,8 +25,12 @@ public class Model {
         return ModelHolder.INSTANCE;
     }
 
-    void convert(String text) throws IOException {
-        bll.convert(text);
+    void convert(String text, Config config) throws IOException {
+        bll.convert(text, config);
+    }
+
+    List<Config> getConfigs() {
+        return bll.getConfigs();
     }
     
     private static class ModelHolder {

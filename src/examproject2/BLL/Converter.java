@@ -5,7 +5,7 @@
  */
 package examproject2.BLL;
 
-import examproject2.BE.Config;
+import examproject2.BE.Key;
 import examproject2.BE.Header;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,9 +31,9 @@ import org.json.JSONObject;
 public class Converter {
 
     List<Header> headers = new ArrayList();
-    List<Config> keys;
+    List<Key> keys;
     JSONArray myJSONObjects = new JSONArray();
-    List<Config> secondary;
+    List<Key> secondary;
 
     public enum filetype {
         xlsx,
@@ -91,7 +91,7 @@ public class Converter {
 
     private void setIndex() {
         for (Header header : headers) {
-            for (Config key : keys) {
+            for (Key key : keys) {
                 if (key.getKeyWord() != null) {
                     if (header.getValue().toLowerCase().trim().contains(key.getKeyWord().toLowerCase().trim())) {
                         key.setColumnIndex(header.getIndex());
@@ -122,7 +122,7 @@ public class Converter {
     }
 
     private void addToJson(JSONObject obj, JSONObject planning, Cell cell) {
-        for (Config index : keys) {
+        for (Key index : keys) {
             if (index.getKeyWord() == null) {
                 secondary.add(index);
             }
@@ -166,7 +166,7 @@ public class Converter {
     }
 
     private void secondaryAddToJson(JSONObject obj, JSONObject planning, Cell cell) {
-        for (Config index : secondary) {
+        for (Key index : secondary) {
             if (index.getSecondaryKeyWord() == null) {
                 obj.put(index.getJsonAttribute(), index.getDefaultValue());
             }
