@@ -10,6 +10,7 @@ import examproject2.BE.Config;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,6 +78,17 @@ public class ConverterViewController implements Initializable {
         model.convert(txtPath.getText(), txtSavePath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
     }
 
+        model.convert(txtPath.getText());
+    }
+
+        model.convert(txtPath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
+    }
+
+        
+        model.convert(txtPath.getText(),txtSavePath.getText());
+        }
+    
+>>>>>>> 442bc0fb7818303b2a120553095e6d323b067009
     @FXML
     private void Configure(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -104,6 +116,7 @@ public class ConverterViewController implements Initializable {
         alert.show();
     }
 
+=======
     private void setConfigs() {
         cbmSettings.getItems().setAll(model.getConfigs());
     }
