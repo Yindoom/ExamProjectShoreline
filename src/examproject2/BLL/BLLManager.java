@@ -18,19 +18,14 @@ import java.util.List;
  * @author Yindo
  */
 public class BLLManager {
-    
+
     Converter convert = new Converter();
     DALManager dal = new DALManager();
-    
-    public void convert(String text, Config con) throws IOException {
-       
+
+    public void convert(String text, String path, Config con) throws IOException {
+
         List<Key> config = new ArrayList(dal.getConfig(con));
         convert.convert(dal.getIterator(text), xlsx, config);
-        dal.write(convert.myJSONObjects);
-    public void convert(String file, String path) throws IOException {
-       
-        List<Config> config = new ArrayList(dal.getConfig());
-        convert.convert(dal.getIterator(file), xlsx, config);
         dal.write(convert.myJSONObjects, path);
     }
 

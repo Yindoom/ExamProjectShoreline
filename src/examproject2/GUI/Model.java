@@ -25,14 +25,12 @@ public class Model {
         return ModelHolder.INSTANCE;
     }
 
-    void convert(String text, Config config) throws IOException {
-        bll.convert(text, config);
+    void convert(String file, String path, Config config) throws IOException {
+        bll.convert(file, path, config);
     }
 
     List<Config> getConfigs() {
         return bll.getConfigs();
-    void convert(String file, String path) throws IOException {
-        bll.convert(file, path);
     }
     
     private static class ModelHolder {

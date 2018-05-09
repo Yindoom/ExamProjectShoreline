@@ -74,13 +74,9 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
-        model.convert(txtPath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
+        model.convert(txtPath.getText(), txtSavePath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
     }
 
-        
-        model.convert(txtPath.getText(),txtSavePath.getText());
-        }
-    
     @FXML
     private void Configure(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -114,18 +110,15 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnFilePathSave(ActionEvent event) {
-                String Stringpath = null;
-        
+        String Stringpath = null;
+
         final DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(null);
 
-
-        
-        if (selectedDirectory != null)
-        {
+        if (selectedDirectory != null) {
             Stringpath = selectedDirectory.getAbsolutePath();
         }
         txtSavePath.setText(Stringpath);
     }
-    
+
 }
