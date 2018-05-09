@@ -15,7 +15,7 @@ import org.apache.commons.io.FilenameUtils;
 
 /**
  *
- * @author Yindo
+ * @author Bastian
  */
 public class BLLManager {
 

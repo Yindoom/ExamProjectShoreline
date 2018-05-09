@@ -40,6 +40,8 @@ public class Converter {
         xml
     }
 
+    //@author Bastian and Emil
+    
     public void convert(Iterator<Row> itr, filetype xlsx, List config) throws IOException {
 
         keys = config;

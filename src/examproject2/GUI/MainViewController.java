@@ -82,7 +82,7 @@ public class MainViewController implements Initializable {
                 primaryStage.showAndWait();
             }
         } 
-        else {
+        else if(!txtName.getText().isEmpty()) {
             Stage primaryStage = new Stage();
             primaryStage.initModality(Modality.WINDOW_MODAL);
             FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ConverterView.fxml"));

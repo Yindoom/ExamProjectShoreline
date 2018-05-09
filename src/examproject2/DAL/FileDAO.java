@@ -5,7 +5,6 @@
  */
 package examproject2.DAL;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,10 +32,9 @@ public class FileDAO {
         return sheet.iterator();
     }
 
-
     public void write(JSONArray jsonFiles, String path, String name) throws IOException {
-        
-        try (FileWriter file = new FileWriter(path + "\\" + name+ ".json")) {
+
+        try (FileWriter file = new FileWriter(path + "\\" + name + ".json")) {
 
             file.write(jsonFiles.toString(4));
             file.flush();

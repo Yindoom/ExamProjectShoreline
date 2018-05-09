@@ -8,9 +8,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.ConverterViewController">
+<AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.ConverterViewController">
    <children>
-      <ComboBox fx:id="cbmSettings" layoutX="14.0" layoutY="37.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0" />
+      <ComboBox fx:id="cbmSettings" layoutX="14.0" layoutY="37.0" prefHeight="31.0" prefWidth="145.0" promptText="Select config" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0" />
       <TableView fx:id="tbvConversions" layoutX="341.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="45.0">
         <columns>
           <TableColumn fx:id="convertName" prefWidth="82.0" text="C1" />
@@ -26,5 +26,7 @@
       <Label layoutX="19.0" layoutY="296.0" text="Save to:" />
       <TextField fx:id="txtSavePath" layoutX="66.0" layoutY="292.0" prefHeight="25.0" prefWidth="397.0" />
       <Button layoutX="483.0" layoutY="292.0" mnemonicParsing="false" onAction="#btnFilePathSave" text="Browse" />
+      <Label layoutX="164.0" layoutY="12.0" text="Current user:" />
+      <Label fx:id="lblUser" layoutX="259.0" layoutY="12.0" />
    </children>
 </AnchorPane>

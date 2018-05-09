@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -50,6 +51,8 @@ public class ConverterViewController implements Initializable {
     private TextField txtPath;
     @FXML
     private TextField txtSavePath;
+    @FXML
+    private Label lblUser;
 
     /**
      * Initializes the controller class.
@@ -90,10 +93,12 @@ public class ConverterViewController implements Initializable {
     public void setUser(String user) {
         currentUser = user;
         admConfig.setVisible(false);
+        lblUser.setText(currentUser);
     }
 
     public void setUser(Admin admin) {
         currentUser = admin.getName();
+        lblUser.setText(currentUser);
     }
 
     @FXML
