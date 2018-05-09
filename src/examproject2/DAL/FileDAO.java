@@ -33,15 +33,11 @@ public class FileDAO {
         return sheet.iterator();
     }
 
-<<<<<<< HEAD
-    public void write(JSONArray jsonFiles, String name) throws IOException {
 
-        try (FileWriter file = new FileWriter("C:\\Users\\ZeXVex\\Desktop\\Shoreline\\Test\\"+name+".json")) {
-=======
-    public void write(JSONArray jsonFiles, String path) throws IOException {
+    public void write(JSONArray jsonFiles, String path, String name) throws IOException {
         
-        try (FileWriter file = new FileWriter(path + "\\test.json")) {
->>>>>>> fc4767f8b0ed663ec346d3caf5650d9cb254cff5
+        try (FileWriter file = new FileWriter(path + "\\" + name+ ".json")) {
+
             file.write(jsonFiles.toString(4));
             file.flush();
         }

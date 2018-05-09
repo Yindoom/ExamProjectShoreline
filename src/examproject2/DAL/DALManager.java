@@ -7,6 +7,7 @@ package examproject2.DAL;
 
 import examproject2.BE.Config;
 import examproject2.BE.Key;
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -33,19 +34,12 @@ public class DALManager {
         return file.getIterator(filepath);
     }
     
-
-<<<<<<< HEAD
-    public void write(JSONArray jsonFiles, String name) throws IOException {
-        file.write(jsonFiles, name);
-=======
-    public void write(JSONArray jsonFiles, String path) throws IOException {
-        file.write(jsonFiles, path);
+    public void write(JSONArray jsonFiles, String path, String name) throws IOException {
+        file.write(jsonFiles, path, name);
     }
 
     public List<Config> getAllConfigs() {
         return db.getConfigs();
->>>>>>> fc4767f8b0ed663ec346d3caf5650d9cb254cff5
     }
-
     
 }
