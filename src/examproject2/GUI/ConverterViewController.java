@@ -78,7 +78,21 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
-        model.convert(txtPath.getText(), txtSavePath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
+        try { 
+            model.convert(txtPath.getText(), txtSavePath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Complete");
+                    alert.setHeaderText("Conversion Succesful");
+                    alert.setContentText("File succesfully converted");
+                    alert.show();
+        }
+        catch(NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Something went wrong");
+            alert.setContentText("Please make sure you have chosen a file to convert, a configuration, and a save folder");
+            alert.show();
+        }
     }
 
     @FXML
