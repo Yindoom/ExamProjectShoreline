@@ -8,25 +8,25 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.ConverterViewController">
+<AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.ConverterViewController">
    <children>
-      <ComboBox fx:id="cbmSettings" layoutX="14.0" layoutY="37.0" prefHeight="31.0" prefWidth="145.0" promptText="Select config" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="50.0" />
-      <TableView fx:id="tbvConversions" layoutX="341.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="45.0">
+      <ComboBox fx:id="cbmSettings" layoutX="10.0" layoutY="38.0" prefHeight="31.0" prefWidth="145.0" promptText="Select config" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="38.0" />
+      <TableView fx:id="tbvConversions" layoutX="165.0" layoutY="189.0" prefHeight="171.0" prefWidth="543.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="189.0">
         <columns>
-          <TableColumn fx:id="convertName" prefWidth="82.0" text="C1" />
-          <TableColumn fx:id="convertProgress" prefWidth="117.0" text="C2" />
+          <TableColumn fx:id="convertName" prefWidth="246.66665649414062" text="C1" />
+          <TableColumn fx:id="convertProgress" prefWidth="289.6666259765625" text="C2" />
         </columns>
       </TableView>
-      <Button fx:id="admConfig" layoutX="55.0" layoutY="14.0" mnemonicParsing="false" onAction="#Configure" prefHeight="25.0" prefWidth="69.0" text="Configure" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="14.0" />
-      <Label layoutX="14.0" layoutY="264.0" text="File path :" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="264.0" />
-      <TextField fx:id="txtPath" layoutX="66.0" layoutY="260.0" prefHeight="25.0" prefWidth="397.0" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="66.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="260.0" />
-      <Button layoutX="483.0" layoutY="260.0" mnemonicParsing="false" onAction="#btnFilePath" text="Browse" AnchorPane.bottomAnchor="89.0" AnchorPane.rightAnchor="15.0" />
-      <Button layoutX="460.0" layoutY="344.0" mnemonicParsing="false" onAction="#btnConvert" text="Convert" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="20.0" />
-      <Button layoutX="465.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnActivity" text="Activity" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="7.0" />
-      <Label layoutX="19.0" layoutY="296.0" text="Save to:" />
-      <TextField fx:id="txtSavePath" layoutX="66.0" layoutY="292.0" prefHeight="25.0" prefWidth="397.0" />
-      <Button layoutX="483.0" layoutY="292.0" mnemonicParsing="false" onAction="#btnFilePathSave" text="Browse" />
-      <Label layoutX="164.0" layoutY="12.0" text="Current user:" />
+      <Button fx:id="admConfig" layoutX="174.0" layoutY="41.0" mnemonicParsing="false" onAction="#Configure" prefHeight="25.0" prefWidth="69.0" text="Configure" AnchorPane.leftAnchor="174.0" AnchorPane.topAnchor="41.0" />
+      <Label layoutX="14.0" layoutY="86.0" text="File path :" AnchorPane.bottomAnchor="271.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="86.0" />
+      <TextField fx:id="txtPath" layoutX="66.0" layoutY="82.0" prefHeight="25.0" prefWidth="397.0" AnchorPane.bottomAnchor="267.0" AnchorPane.leftAnchor="66.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="82.0" />
+      <Button layoutX="477.0" layoutY="82.0" mnemonicParsing="false" onAction="#btnFilePath" text="Browse" AnchorPane.bottomAnchor="267.0" AnchorPane.rightAnchor="21.0" />
+      <Button layoutX="195.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnConvert" prefHeight="25.0" prefWidth="139.0" text="Convert" AnchorPane.bottomAnchor="198.0" AnchorPane.rightAnchor="219.0" />
+      <Button layoutX="465.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnActivity" text="Logs" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="7.0" />
+      <Label layoutX="19.0" layoutY="122.0" text="Save to:" />
+      <TextField fx:id="txtSavePath" layoutX="66.0" layoutY="118.0" prefHeight="25.0" prefWidth="397.0" />
+      <Button layoutX="477.0" layoutY="118.0" mnemonicParsing="false" onAction="#btnFilePathSave" text="Browse" />
+      <Label layoutX="14.0" layoutY="12.0" text="Current user:" />
       <Label fx:id="lblUser" layoutX="259.0" layoutY="12.0" />
    </children>
 </AnchorPane>
