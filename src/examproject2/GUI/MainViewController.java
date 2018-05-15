@@ -32,57 +32,16 @@ public class MainViewController implements Initializable {
     @FXML
     private TextField txtName;
     @FXML
-    private TextField txtAdm;
-    @FXML
-    private Label AdminPass;
-    @FXML
-    private Button btnAdmin;
-    @FXML
-    private Label lblName;
-    @FXML
     private Button loginButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txtAdm.setVisible(false);
-        AdminPass.setVisible(false);
-    }
-
-    @FXML
-    private void handleAdmin(ActionEvent event) {
-        txtAdm.setVisible(true);
-        AdminPass.setVisible(true);
-        btnAdmin.setVisible(false);
-        lblName.setText("Please insert username");
     }
 
     //Nicolai & Bastian
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
-        if (!txtAdm.getText().isEmpty()) {
-            Admin admin = new Admin();
-            admin.setName("adm");
-            admin.setPassword("1");
-            if (txtName.getText().equals(admin.getName()) && txtAdm.getText().equals(admin.getPassword())) {
-                
-                Stage primaryStage = new Stage();
-                primaryStage.initModality(Modality.WINDOW_MODAL);
-                FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ConverterView.fxml"));
-
-                Parent root = fxLoader.load();
-                ConverterViewController cvc = fxLoader.getController();
-                cvc.setUser(admin);
-                
-                            
-                Stage oldStage = (Stage) loginButton.getScene().getWindow();
-                oldStage.close();
-
-                Scene scene = new Scene(root);
-                primaryStage.setScene(scene);
-                primaryStage.showAndWait();
-            }
-        } 
-        else if(!txtName.getText().isEmpty()) {
+        if (!txtName.getText().isEmpty()) {
             Stage primaryStage = new Stage();
             primaryStage.initModality(Modality.WINDOW_MODAL);
             FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ConverterView.fxml"));
@@ -90,8 +49,7 @@ public class MainViewController implements Initializable {
             Parent root = fxLoader.load();
             ConverterViewController cvc = fxLoader.getController();
             cvc.setUser(txtName.getText());
-            
-                        
+
             Stage oldStage = (Stage) loginButton.getScene().getWindow();
             oldStage.close();
 

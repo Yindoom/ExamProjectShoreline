@@ -6,6 +6,7 @@
 package examproject2.BLL;
 
 import examproject2.BE.Config;
+import examproject2.BE.Key;
 import static examproject2.BLL.Converter.filetype.xlsx;
 import examproject2.DAL.DALManager;
 import java.io.IOException;
@@ -37,5 +38,9 @@ public class BLLManager {
 
     public List<Config> getConfigs() {
         return dal.getAllConfigs();
+    }
+
+    public List<Key> getKeys(Config selectedConfig) {
+        return dal.getKeys(selectedConfig);
     }
 }

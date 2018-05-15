@@ -7,15 +7,11 @@ package examproject2.DAL;
 
 import examproject2.BE.Config;
 import examproject2.BE.Key;
-import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import javax.xml.parsers.ParserConfigurationException;
 import org.apache.poi.ss.usermodel.Row;
 import org.json.JSONArray;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -40,6 +36,10 @@ public class DALManager {
 
     public List<Config> getAllConfigs() {
         return db.getConfigs();
+    }
+
+    public List<Key> getKeys(Config selectedConfig) {
+        return db.getKeyWords(selectedConfig);
     }
     
 }

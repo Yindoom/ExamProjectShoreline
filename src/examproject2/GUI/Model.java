@@ -6,6 +6,7 @@
 package examproject2.GUI;
 
 import examproject2.BE.Config;
+import examproject2.BE.Key;
 import examproject2.BLL.BLLManager;
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +32,14 @@ public class Model {
 
     List<Config> getConfigs() {
         return bll.getConfigs();
+    }
+
+    List<Key> getKeys(Config selectedConfig) {
+        return bll.getKeys(selectedConfig);
+    }
+
+    void saveActivity(String logActivity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static class ModelHolder {

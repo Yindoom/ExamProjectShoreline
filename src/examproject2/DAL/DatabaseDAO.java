@@ -55,7 +55,6 @@ public class DatabaseDAO {
         try (Connection con = cm.getConnection()) {
             PreparedStatement stmt
                     = con.prepareStatement("SELECT * FROM Configs");
-            //stmt.setInt(1, );
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Config config = new Config();

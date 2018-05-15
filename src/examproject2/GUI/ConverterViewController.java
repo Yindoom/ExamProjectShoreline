@@ -14,7 +14,10 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -24,6 +27,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
@@ -60,7 +65,6 @@ public class ConverterViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setConfigs();
-
     }
 
     @FXML
@@ -78,15 +82,14 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
-        try { 
+        try {
             model.convert(txtPath.getText(), txtSavePath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Complete");
-                    alert.setHeaderText("Conversion Succesful");
-                    alert.setContentText("File succesfully converted");
-                    alert.show();
-        }
-        catch(NullPointerException e){
+            alert.setTitle("Complete");
+            alert.setHeaderText("Conversion Succesful");
+            alert.setContentText("File succesfully converted");
+            alert.show();
+        } catch (NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Something went wrong");
@@ -96,23 +99,22 @@ public class ConverterViewController implements Initializable {
     }
 
     @FXML
-    private void Configure(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Please be patient");
-        alert.setHeaderText(currentUser);
-        alert.setContentText("This feature is not available as of yet");
-        alert.show();
+    private void Configure(ActionEvent event) throws IOException {
+        Stage primaryStage = new Stage();
+        primaryStage.initModality(Modality.WINDOW_MODAL);
+        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("AdminSettingsView.fxml"));
+
+        Parent root = fxLoader.load();
+        AdminSettingsViewController ctrl = fxLoader.getController();
+        ctrl.setUser(currentUser);
+
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.showAndWait();
     }
 
     public void setUser(String user) {
         currentUser = user;
-        admConfig.setVisible(false);
-        lblUser.setText(currentUser);
-    }
-
-    public void setUser(Admin admin) {
-        currentUser = admin.getName();
-        lblUser.setText(currentUser);
     }
 
     @FXML
@@ -123,7 +125,7 @@ public class ConverterViewController implements Initializable {
         alert.setContentText("This window has not been implemented yet. \t Thank you for your patience.");
         alert.show();
     }
-    
+
     private void setConfigs() {
         cbmSettings.getItems().setAll(model.getConfigs());
     }
