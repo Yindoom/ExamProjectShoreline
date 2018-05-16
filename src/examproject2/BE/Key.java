@@ -17,6 +17,23 @@ public class Key {
     private String secondaryKeyWord;
     private String defaultValue;
     private int secondaryIndex;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Key() {
+
+    }
+
+    public Key(String jsonAttribute) {
+        this.jsonAttribute = jsonAttribute;
+    }
 
     public int getSecondaryIndex() {
         return secondaryIndex;

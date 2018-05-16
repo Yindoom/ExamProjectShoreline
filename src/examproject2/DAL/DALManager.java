@@ -10,6 +10,7 @@ import examproject2.BE.Key;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import javafx.scene.control.TextField;
 import org.apache.poi.ss.usermodel.Row;
 import org.json.JSONArray;
 
@@ -40,6 +41,18 @@ public class DALManager {
 
     public List<Key> getKeys(Config selectedConfig) {
         return db.getKeyWords(selectedConfig);
+    }
+
+    public void saveConfig(Config config) {
+        db.saveConfig(config);
+    }
+
+//    public int getConfigId(Config config) {
+//        return db.getConfigId(config);
+//    }
+
+    public void saveKey(Key key) {
+        db.saveKey(key);
     }
     
 }

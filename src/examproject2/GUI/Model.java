@@ -10,6 +10,7 @@ import examproject2.BE.Key;
 import examproject2.BLL.BLLManager;
 import java.io.IOException;
 import java.util.List;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -40,6 +41,10 @@ public class Model {
 
     void saveActivity(String logActivity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void saveConfig(Config config, List<Key> keys) {
+        bll.saveConfig(config, keys);
     }
 
     private static class ModelHolder {

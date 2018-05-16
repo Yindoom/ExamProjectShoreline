@@ -14,6 +14,16 @@ public class Config {
     private String name;
     private int id;
 
+    private String fileType;
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
     public int getId() {
         return id;
     }
@@ -34,7 +44,5 @@ public class Config {
     public String toString() {
         return name;
     }
-    
-    
 
 }

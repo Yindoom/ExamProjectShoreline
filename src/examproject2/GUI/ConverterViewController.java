@@ -114,7 +114,8 @@ public class ConverterViewController implements Initializable {
     }
 
     public void setUser(String user) {
-        currentUser = user;
+        lblUser.setText(user);
+        this.currentUser = user;
     }
 
     @FXML

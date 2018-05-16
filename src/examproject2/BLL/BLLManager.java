@@ -12,6 +12,7 @@ import examproject2.DAL.DALManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.TextField;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -42,5 +43,13 @@ public class BLLManager {
 
     public List<Key> getKeys(Config selectedConfig) {
         return dal.getKeys(selectedConfig);
+    }
+
+    public void saveConfig(Config config, List<Key> keys) {
+        dal.saveConfig(config);
+        for (Key key : keys) {
+            key.setId(config.getId());
+            dal.saveKey(key);
+        }
     }
 }
