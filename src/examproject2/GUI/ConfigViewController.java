@@ -122,6 +122,7 @@ public class ConfigViewController implements Initializable {
     private void clickSave(ActionEvent event) {
         String logActivity = user + activity + configName.getText();
         model.saveActivity(logActivity);
+        
     }
     
 }
