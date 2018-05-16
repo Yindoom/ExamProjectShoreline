@@ -100,23 +100,6 @@ public class DatabaseDAO {
         }
     }
 
-    int getConfigId(Config config) {
-        int id = -1;
-        try (Connection con = cm.getConnection()) {
-            PreparedStatement stmt
-                    = con.prepareStatement("SELECT id FROM Configs WHERE name=?" );
-            stmt.setString(1, config.getName());
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                id = rs.getInt("id");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseDAO.class.getName()).log(
-                    Level.SEVERE, null, ex);
-        }
-        return id;
-    }
-
     public void saveKey(Key key) {
         try (Connection con = cm.getConnection()) {
             String sql
@@ -126,11 +109,14 @@ public class DatabaseDAO {
             PreparedStatement pstmt
                     = con.prepareStatement(
                             sql, Statement.RETURN_GENERATED_KEYS);
+            
             pstmt.setString(1, key.getKeyWord());
             pstmt.setString(2, key.getJsonAttribute());
             pstmt.setInt(3, key.getId());
             pstmt.setString(4, key.getSecondaryKeyWord());
             pstmt.setString(5, key.getDefaultValue());
+            
+            pstmt.execute();
 
             int affected = pstmt.executeUpdate();
             if (affected < 1) {
@@ -158,12 +144,35 @@ public class DatabaseDAO {
                 Log.setActivity(rs.getString("Activity"));
 
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
 
         }
         return Activity;
+    }
+
+    public void updateKey(Key key) {
+        try (Connection con = cm.getConnection()) {
+            String sql
+                    = "UPDATE keyword SET "
+                    + "keyword=?, secondarykeyword=?, defaultvalue=? "
+                    + "WHERE config=? AND jsonAttribute=?";
+            PreparedStatement pstmt
+                    = con.prepareStatement(
+                            sql, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, key.getKeyWord());
+            pstmt.setString(2, key.getSecondaryKeyWord());
+            pstmt.setString(3, key.getDefaultValue());
+            pstmt.setInt(4, key.getId());
+            pstmt.setString(5, key.getJsonAttribute());
+            
+            pstmt.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
     }
 }

@@ -156,6 +156,7 @@ public class ConfigViewController implements Initializable {
             for (Key key : keys) {
                 key.setId(id);
             }
+            model.updateConfig(keys);
 
             String logActivity = user + activity + configName.getText();
             model.saveActivity(logActivity);
@@ -230,98 +231,126 @@ public class ConfigViewController implements Initializable {
     private void save(List<Key> keys) {
         for (Key key : keys) {
             if (key.getJsonAttribute().equals("type")) {
-                if(!typeKey.getText().isEmpty())
-                key.setKeyWord(typeKey.getText());
-                if(!typeSec.getText().isEmpty())
-                key.setSecondaryKeyWord(typeSec.getText());
-                if(!typeDef.getText().isEmpty())
-                key.setDefaultValue(typeDef.getText());
+                if (!typeKey.getText().isEmpty()) {
+                    key.setKeyWord(typeKey.getText());
+                }
+                if (!typeSec.getText().isEmpty()) {
+                    key.setSecondaryKeyWord(typeSec.getText());
+                }
+                if (!typeDef.getText().isEmpty()) {
+                    key.setDefaultValue(typeDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("externalWorkOrderId")) {
-                if(!externalKey.getText().isEmpty())
-                key.setKeyWord(externalKey.getText());
-                if(!externalSec.getText().isEmpty())
-                key.setSecondaryKeyWord(externalSec.getText());
-                if(!externalDef.getText().isEmpty())
-                key.setDefaultValue(externalDef.getText());
+                if (!externalKey.getText().isEmpty()) {
+                    key.setKeyWord(externalKey.getText());
+                }
+                if (!externalSec.getText().isEmpty()) {
+                    key.setSecondaryKeyWord(externalSec.getText());
+                }
+                if (!externalDef.getText().isEmpty()) {
+                    key.setDefaultValue(externalDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("systemStatus")) {
-                if(!sysKey.getText().isEmpty())
+                if (!sysKey.getText().isEmpty()) {
                     key.setKeyWord(sysKey.getText());
-                if(!sysSec.getText().isEmpty())
+                }
+                if (!sysSec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(sysSec.getText());
-                if(!sysDef.getText().isEmpty())
+                }
+                if (!sysDef.getText().isEmpty()) {
                     key.setDefaultValue(sysDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("userStatus")) {
-                if(!userKey.getText().isEmpty())
+                if (!userKey.getText().isEmpty()) {
                     key.setKeyWord(userKey.getText());
-                if(!userSec.getText().isEmpty())
+                }
+                if (!userSec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(userSec.getText());
-                if(!userDef.getText().isEmpty())
+                }
+                if (!userDef.getText().isEmpty()) {
                     key.setDefaultValue(userDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("name")) {
-                if(!nameKey.getText().isEmpty())
+                if (!nameKey.getText().isEmpty()) {
                     key.setKeyWord(nameKey.getText());
-                if(!nameSec.getText().isEmpty())
+                }
+                if (!nameSec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(nameSec.getText());
-                if(!nameDef.getText().isEmpty())
+                }
+                if (!nameDef.getText().isEmpty()) {
                     key.setDefaultValue(nameDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("priority")) {
-                if(!priorityKey.getText().isEmpty())
+                if (!priorityKey.getText().isEmpty()) {
                     key.setKeyWord(priorityKey.getText());
-                if(!prioritySec.getText().isEmpty())
+                }
+                if (!prioritySec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(prioritySec.getText());
-                if(!priorityDef.getText().isEmpty())
+                }
+                if (!priorityDef.getText().isEmpty()) {
                     key.setDefaultValue(priorityDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("status")) {
-                if(!statusKey.getText().isEmpty())
+                if (!statusKey.getText().isEmpty()) {
                     key.setKeyWord(statusKey.getText());
-                if(!statusSec.getText().isEmpty())
+                }
+                if (!statusSec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(statusSec.getText());
-                if(!statusDef.getText().isEmpty())
+                }
+                if (!statusDef.getText().isEmpty()) {
                     key.setDefaultValue(statusDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("latestFinishDate")) {
-                if(!finishKey.getText().isEmpty())
+                if (!finishKey.getText().isEmpty()) {
                     key.setKeyWord(finishKey.getText());
-                if(!finishSec.getText().isEmpty())
+                }
+                if (!finishSec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(finishSec.getText());
-                if(!finishDef.getText().isEmpty())
+                }
+                if (!finishDef.getText().isEmpty()) {
                     key.setDefaultValue(finishDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("earliestStartDate")) {
-                if(!earlyStartKey.getText().isEmpty())
+                if (!earlyStartKey.getText().isEmpty()) {
                     key.setKeyWord(earlyStartKey.getText());
-                if(!earlyStartSec.getText().isEmpty())
+                }
+                if (!earlyStartSec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(earlyStartSec.getText());
-                if(!earlyStartDef.getText().isEmpty())
+                }
+                if (!earlyStartDef.getText().isEmpty()) {
                     key.setDefaultValue(earlyStartDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("latestStartDate")) {
-                if(!lateStartKey.getText().isEmpty())
+                if (!lateStartKey.getText().isEmpty()) {
                     key.setKeyWord(lateStartKey.getText());
-                if(!lateStartSec.getText().isEmpty())
+                }
+                if (!lateStartSec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(lateStartSec.getText());
-                if(!lateStartDef.getText().isEmpty())
+                }
+                if (!lateStartDef.getText().isEmpty()) {
                     key.setDefaultValue(lateStartDef.getText());
+                }
             }
             if (key.getJsonAttribute().equals("estimatedTime")) {
-                if(!timeKey.getText().isEmpty())
+                if (!timeKey.getText().isEmpty()) {
                     key.setKeyWord(timeKey.getText());
-                if(!timeSec.getText().isEmpty())
+                }
+                if (!timeSec.getText().isEmpty()) {
                     key.setSecondaryKeyWord(timeSec.getText());
-                if(!timeDef.getText().isEmpty())
+                }
+                if (!timeDef.getText().isEmpty()) {
                     key.setDefaultValue(timeDef.getText());
+                }
             }
         }
-    @FXML
-    private void clickSave(ActionEvent event) {
-        String logActivity = user + activity + configName.getText();
-        model.saveActivity(logActivity);
-        
     }
 }

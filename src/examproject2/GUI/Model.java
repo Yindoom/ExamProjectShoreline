@@ -47,6 +47,10 @@ public class Model {
         bll.saveConfig(config, keys);
     }
 
+    public void updateConfig(List<Key> keys) {
+        bll.updateConfig(keys);
+    }
+
     private static class ModelHolder {
 
         private static final Model INSTANCE = new Model();

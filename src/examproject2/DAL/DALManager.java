@@ -47,12 +47,13 @@ public class DALManager {
         db.saveConfig(config);
     }
 
-//    public int getConfigId(Config config) {
-//        return db.getConfigId(config);
-//    }
 
     public void saveKey(Key key) {
         db.saveKey(key);
+    }
+
+    public void updateKey(Key key) {
+        db.updateKey(key);
     }
     
 }

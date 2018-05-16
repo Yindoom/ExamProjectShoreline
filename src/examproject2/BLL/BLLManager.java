@@ -52,4 +52,10 @@ public class BLLManager {
             dal.saveKey(key);
         }
     }
+
+    public void updateConfig(List<Key> keys) {
+        for (Key key : keys) {
+            dal.updateKey(key);
+        }
+    }
 }
