@@ -318,5 +318,10 @@ public class ConfigViewController implements Initializable {
                     key.setDefaultValue(timeDef.getText());
             }
         }
+    @FXML
+    private void clickSave(ActionEvent event) {
+        String logActivity = user + activity + configName.getText();
+        model.saveActivity(logActivity);
+        
     }
 }

@@ -5,6 +5,7 @@
  */
 package examproject2.DAL;
 
+import examproject2.BE.ActivityLog;
 import examproject2.BE.Config;
 import examproject2.BE.Key;
 import java.sql.Connection;
@@ -142,4 +143,27 @@ public class DatabaseDAO {
         }
     }
 
+    List<ActivityLog> getActivities() {
+        List<ActivityLog> Activity
+                = new ArrayList();
+
+        try (Connection con = cm.getConnection()) {
+            PreparedStatement stmt
+                    = con.prepareStatement("SELECT * FROM ErrorLog");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ActivityLog Log = new ActivityLog();
+                Log.setName(rs.getString("userName"));
+                Log.setType(rs.getString("ActivityType"));
+                Log.setActivity(rs.getString("Activity"));
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(
+                    Level.SEVERE, null, ex);
+
+        }
+        return Activity;
+    }
 }
