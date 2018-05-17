@@ -5,12 +5,11 @@
  */
 package examproject2.GUI;
 
-import examproject2.BE.Admin;
 import examproject2.BE.Config;
+import examproject2.BE.Conversion;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,11 +46,11 @@ public class ConverterViewController implements Initializable {
     @FXML
     private Button admConfig;
     @FXML
-    private TableView<?> tbvConversions;
+    private TableView<Conversion> tbvConversions;
     @FXML
-    private TableColumn<?, ?> convertName;
+    private TableColumn<Conversion, String> convertName;
     @FXML
-    private TableColumn<?, ?> convertProgress;
+    private TableColumn<Conversion, Object> convertProgress;
     @FXML
     private TextField txtPath;
     @FXML
@@ -119,12 +118,16 @@ public class ConverterViewController implements Initializable {
     }
 
     @FXML
-    private void btnActivity(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Sorry");
-        alert.setHeaderText(currentUser);
-        alert.setContentText("This window has not been implemented yet. \t Thank you for your patience.");
-        alert.show();
+    private void btnActivity(ActionEvent event) throws IOException {
+        Stage primaryStage = new Stage();
+        primaryStage.initModality(Modality.WINDOW_MODAL);
+        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ActivityView.fxml"));
+
+        Parent root = fxLoader.load();
+
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.showAndWait();
     }
 
     private void setConfigs() {

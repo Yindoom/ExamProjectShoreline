@@ -5,11 +5,13 @@
  */
 package examproject2.DAL;
 
+import examproject2.BE.Activity;
 import examproject2.BE.Config;
 import examproject2.BE.Key;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 import org.apache.poi.ss.usermodel.Row;
 import org.json.JSONArray;
@@ -54,6 +56,14 @@ public class DALManager {
 
     public void updateKey(Key key) {
         db.updateKey(key);
+    }
+
+    public void log(Activity log) {
+        db.log(log);
+    }
+
+    public ObservableList getActivity() {
+        return db.getActivities();
     }
     
 }

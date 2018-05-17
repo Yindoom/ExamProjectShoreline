@@ -5,7 +5,7 @@
  */
 package examproject2.DAL;
 
-import examproject2.BE.ActivityLog;
+import examproject2.BE.Activity;
 import examproject2.BE.Config;
 import examproject2.BE.Key;
 import java.sql.Connection;
@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -109,14 +111,12 @@ public class DatabaseDAO {
             PreparedStatement pstmt
                     = con.prepareStatement(
                             sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             pstmt.setString(1, key.getKeyWord());
             pstmt.setString(2, key.getJsonAttribute());
             pstmt.setInt(3, key.getId());
             pstmt.setString(4, key.getSecondaryKeyWord());
             pstmt.setString(5, key.getDefaultValue());
-            
-            pstmt.execute();
 
             int affected = pstmt.executeUpdate();
             if (affected < 1) {
@@ -129,8 +129,8 @@ public class DatabaseDAO {
         }
     }
 
-    List<ActivityLog> getActivities() {
-        List<ActivityLog> Activity
+    ObservableList<Activity> getActivities() {
+        List<Activity> activity
                 = new ArrayList();
 
         try (Connection con = cm.getConnection()) {
@@ -138,11 +138,12 @@ public class DatabaseDAO {
                     = con.prepareStatement("SELECT * FROM ErrorLog");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                ActivityLog Log = new ActivityLog();
-                Log.setName(rs.getString("userName"));
-                Log.setType(rs.getString("ActivityType"));
-                Log.setActivity(rs.getString("Activity"));
-
+                Activity log = new Activity();
+                log.setName(rs.getString("userName"));
+                log.setType(rs.getString("activitytype"));
+                log.setSubject(rs.getString("activity"));
+                
+                activity.add(log);
             }
 
         } catch (SQLException ex) {
@@ -150,7 +151,7 @@ public class DatabaseDAO {
                     Level.SEVERE, null, ex);
 
         }
-        return Activity;
+        return FXCollections.observableArrayList(activity);
     }
 
     public void updateKey(Key key) {
@@ -167,12 +168,42 @@ public class DatabaseDAO {
             pstmt.setString(3, key.getDefaultValue());
             pstmt.setInt(4, key.getId());
             pstmt.setString(5, key.getJsonAttribute());
-            
-            pstmt.execute();
+
+            int affected = pstmt.executeUpdate();
+            if (affected < 1) {
+                throw new SQLException("keyword could not be updated");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
         }
+    }
+
+    public void log(Activity log) {
+
+        try (Connection con = cm.getConnection()) {
+            String sql
+                    = "INSERT INTO ErrorLog"
+                    + "(userName, activitytype, activity) "
+                    + "VALUES(?,?,?)";
+            PreparedStatement pstmt
+                    = con.prepareStatement(
+                            sql, Statement.RETURN_GENERATED_KEYS);
+
+            pstmt.setString(1, log.getName());
+            pstmt.setString(2, log.getType());
+            pstmt.setString(3, log.getSubject());
+            
+            int affected = pstmt.executeUpdate();
+            if (affected < 1) {
+                throw new SQLException("Log could not be added");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseDAO.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
+
     }
 }

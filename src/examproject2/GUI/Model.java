@@ -5,11 +5,14 @@
  */
 package examproject2.GUI;
 
+import examproject2.BE.Activity;
 import examproject2.BE.Config;
 import examproject2.BE.Key;
 import examproject2.BLL.BLLManager;
+import examproject2.BLL.IBLLManager;
 import java.io.IOException;
 import java.util.List;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
 /**
@@ -19,9 +22,11 @@ import javafx.scene.control.TextField;
 public class Model {
 
     private Model() {
+        bll = BLLManager.getInstance();
     }
 
-    BLLManager bll = new BLLManager();
+    IBLLManager bll;
+    
 
     public static Model getInstance() {
         return ModelHolder.INSTANCE;
@@ -39,8 +44,8 @@ public class Model {
         return bll.getKeys(selectedConfig);
     }
 
-    void saveActivity(String logActivity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void saveActivity(Activity log) {
+        bll.log(log);
     }
 
     public void saveConfig(Config config, List<Key> keys) {
@@ -49,6 +54,10 @@ public class Model {
 
     public void updateConfig(List<Key> keys) {
         bll.updateConfig(keys);
+    }
+
+    public ObservableList getActivity() {
+        return bll.getActivity();
     }
 
     private static class ModelHolder {

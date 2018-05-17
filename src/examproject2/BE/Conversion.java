@@ -14,7 +14,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author Bastian
  */
-public class Conversions {
+public class Conversion {
 
     private final StringProperty fileName = new SimpleStringProperty();
     private final DoubleProperty progress = new SimpleDoubleProperty();

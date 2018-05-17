@@ -51,7 +51,7 @@ public class AdminSettingsViewController implements Initializable {
 
         Parent root = fxLoader.load();
         ConfigViewController cvc = fxLoader.getController();
-        cvc.setUser(currentUser, " edited ");
+        cvc.setUser(currentUser, "Edit");
         cvc.setConfig(selectedConfig);
         
         Scene scene = new Scene(root);
@@ -67,7 +67,7 @@ public class AdminSettingsViewController implements Initializable {
 
         Parent root = fxLoader.load();
         ConfigViewController cvc = fxLoader.getController();
-        cvc.setUser(currentUser, " added ");
+        cvc.setUser(currentUser, "Add");
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
