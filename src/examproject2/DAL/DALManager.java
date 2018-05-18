@@ -24,6 +24,7 @@ public class DALManager implements IDALFacade {
     DatabaseDAO db = new DatabaseDAO();
     FileDAO file = new FileDAO();
 
+    @Override
     public List<Key> getConfig(Config config) {
         return db.getKeyWords(config);
     }
@@ -33,35 +34,43 @@ public class DALManager implements IDALFacade {
         return file.getIterator(filepath);
     }
     
+    @Override
     public void write(JSONArray jsonFiles, String path, String name) throws IOException {
         file.write(jsonFiles, path, name);
     }
 
+    @Override
     public List<Config> getAllConfigs() {
         return db.getConfigs();
     }
 
+    @Override
     public List<Key> getKeys(Config selectedConfig) {
         return db.getKeyWords(selectedConfig);
     }
 
+    @Override
     public void saveConfig(Config config) {
         db.saveConfig(config);
     }
 
 
+    @Override
     public void saveKey(Key key) {
         db.saveKey(key);
     }
 
+    @Override
     public void updateKey(Key key) {
         db.updateKey(key);
     }
 
+    @Override
     public void log(Activity log) {
         db.log(log);
     }
 
+    @Override
     public ObservableList getActivity() {
         return db.getActivities();
     }

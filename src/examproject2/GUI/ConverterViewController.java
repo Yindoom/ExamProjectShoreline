@@ -57,6 +57,8 @@ public class ConverterViewController implements Initializable {
     private TextField txtSavePath;
     @FXML
     private Label lblUser;
+    @FXML
+    private TableColumn<?, ?> convertPath;
 
     /**
      * Initializes the controller class.
