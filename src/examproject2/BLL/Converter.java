@@ -30,10 +30,8 @@ public class Converter {
     JSONArray myJSONObjects = new JSONArray();
     List<Key> secondary;
 
-
     //@author Bastian and Emil
-    
-    public void convert(Iterator<Row> itr, List config) throws IOException {
+    public void convert(Iterator<Row> itr, List config) throws IOException, InterruptedException {
 
         keys = config;
 
@@ -73,7 +71,7 @@ public class Converter {
                 obj.put("assetSerialNumber", "asset.id");
                 obj.put("siteName", "");
                 obj.put("createdBy", "SAP");
-                obj.put("createdOn", LocalDate.now());      
+                obj.put("createdOn", LocalDate.now());
                 obj.put("Planning", planning);
                 myJSONObjects.put(obj);
             }
@@ -100,7 +98,7 @@ public class Converter {
     }
 
     private void getHeaders(Cell cell) {                                        //Here we go through the entire first row, to find all headers
-                                                                                //and add them to a list, so we can compare them to 
+        //and add them to a list, so we can compare them to 
         Header newheader = new Header();                                        //our keys
         newheader.setIndex(cell.getColumnIndex());
         newheader.setValue(cell.getStringCellValue());
@@ -121,7 +119,7 @@ public class Converter {
             }                                                                   //the secondary list of keys
             if (index.getColumnIndex() == cell.getColumnIndex()) {
                 if (index.getJsonAttribute().toLowerCase().contains("date")) {
-                    if (cell.getCellTypeEnum() == STRING) {                     
+                    if (cell.getCellTypeEnum() == STRING) {
                         if (cell.getStringCellValue().isEmpty()) {
                             secondary.add(index);
                         }                                                       //If the JsonAttributes contain "date" or "time" we add it to 
@@ -142,9 +140,9 @@ public class Converter {
                         case STRING:
                             if (cell.getStringCellValue().isEmpty()) {          //Again whenever a cell is empty, we add the key to
                                 secondary.add(index);                           //the secondary key list
+                            } else {
+                                obj.put(index.getJsonAttribute(), cell.getStringCellValue());
                             }
-                            else
-                            obj.put(index.getJsonAttribute(), cell.getStringCellValue());
                             break;
                         case NUMERIC:
                             obj.put(index.getJsonAttribute(), cell.getNumericCellValue());
@@ -181,7 +179,7 @@ public class Converter {
                     }
                 } else {
                     switch (cell.getCellTypeEnum()) {
-                        case STRING:                               
+                        case STRING:
                             if (cell.getStringCellValue().isEmpty()) {
                                 obj.put(index.getJsonAttribute(), index.getDefaultValue());
                             } else {

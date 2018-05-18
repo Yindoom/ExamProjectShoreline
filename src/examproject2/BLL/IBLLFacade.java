@@ -7,6 +7,7 @@ package examproject2.BLL;
 
 import examproject2.BE.Activity;
 import examproject2.BE.Config;
+import examproject2.BE.Conversion;
 import examproject2.BE.Key;
 import java.io.IOException;
 import java.util.List;
@@ -18,7 +19,7 @@ import javafx.collections.ObservableList;
  */
 public interface IBLLFacade {
 
-    public void convert(String text, String path, Config con) throws IOException;
+    public void convert(ObservableList<Conversion> conversions, Config con) throws IOException;
 
     public List<Config> getConfigs();
 

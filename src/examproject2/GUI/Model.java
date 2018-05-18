@@ -7,6 +7,7 @@ package examproject2.GUI;
 
 import examproject2.BE.Activity;
 import examproject2.BE.Config;
+import examproject2.BE.Conversion;
 import examproject2.BE.Key;
 import examproject2.BLL.BLLManager;
 import java.io.IOException;
@@ -32,8 +33,8 @@ public class Model {
         return ModelHolder.INSTANCE;
     }
 
-    void convert(String file, String path, Config config) throws IOException {
-        bll.convert(file, path, config);
+    void convert(ObservableList<Conversion> con, Config config) throws IOException {
+        bll.convert(con, config);
     }
 
     List<Config> getConfigs() {

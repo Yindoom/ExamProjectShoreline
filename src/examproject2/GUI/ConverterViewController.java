@@ -10,6 +10,8 @@ import examproject2.BE.Conversion;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,10 +26,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ProgressBarTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
@@ -50,7 +55,7 @@ public class ConverterViewController implements Initializable {
     @FXML
     private TableColumn<Conversion, String> convertName;
     @FXML
-    private TableColumn<Conversion, Object> convertProgress;
+    private TableColumn<Conversion, Double> convertProgress;
     @FXML
     private TextField txtPath;
     @FXML
@@ -58,13 +63,19 @@ public class ConverterViewController implements Initializable {
     @FXML
     private Label lblUser;
     @FXML
-    private TableColumn<?, ?> convertPath;
+    private TableColumn<Conversion, String> convertPath;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        convertName.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().fileNameProperty());
+        convertProgress.setCellValueFactory(new PropertyValueFactory<Conversion, Double>(
+                "progress"));
+        convertProgress
+                .setCellFactory(ProgressBarTableCell.<Conversion>forTableColumn());
+        convertPath.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().filePathProperty());
         setConfigs();
     }
 
@@ -84,12 +95,9 @@ public class ConverterViewController implements Initializable {
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
         try {
-            model.convert(txtPath.getText(), txtSavePath.getText(), cbmSettings.getSelectionModel().getSelectedItem());
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Complete");
-            alert.setHeaderText("Conversion Succesful");
-            alert.setContentText("File succesfully converted");
-            alert.show();
+           
+            model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
+          
         } catch (NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -147,6 +155,18 @@ public class ConverterViewController implements Initializable {
             Stringpath = selectedDirectory.getAbsolutePath();
         }
         txtSavePath.setText(Stringpath);
+    }
+
+    @FXML
+    private void addConversion(ActionEvent event) {
+        if(!txtPath.getText().isEmpty() && !txtSavePath.getText().isEmpty()) {
+        Conversion con = new Conversion();
+        con.setFileName(FilenameUtils.getBaseName(txtPath.getText()));
+        con.setFilePath(txtPath.getText());
+        con.setSavePath(txtSavePath.getText());
+        
+        tbvConversions.getItems().add(con);
+        }
     }
 
 }
