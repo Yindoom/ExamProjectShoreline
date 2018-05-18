@@ -39,17 +39,8 @@ public class BLLManager implements IBLLFacade {
 
     @Override
     public void convert(ObservableList<Conversion> conversions, Config con) throws IOException {
-    public void convert(String text, String path, Config con) throws IOException {
 
         List<Config> config = new ArrayList(dal.getConfig(con));
-        if (text.toLowerCase().endsWith(".xlsx") == true) {
-            convert.convert(dal.getIterator(text), config);
-        }
-        if (text.toLowerCase().endsWith(".csv") == true) {
-            convert.convert(dal.getCSV(text), config);
-        }
-        dal.write(convert.myJSONObjects, path, getName(text));
-    }
 
         for (Conversion conversion : conversions) {
             Thread t = new Thread(setTask(conversion, con));
@@ -111,6 +102,25 @@ public class BLLManager implements IBLLFacade {
             public void run() {
                 Converter converter = new Converter();
                 List<Config> config = new ArrayList(dal.getConfig(con));
+
+                if (conversion.getFilePath().toLowerCase().endsWith(".xlsx") == true) {
+                    try {
+                        converter.convert(dal.getIterator(conversion.getFilePath()), config);
+                    } catch (IOException ex) {
+                        Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if (conversion.getFilePath().toLowerCase().endsWith(".csv") == true) {
+                    try {
+                        converter.convert(dal.getCSV(conversion.getFilePath()), config);
+                    } catch (IOException ex) {
+                        Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
 
                 try {
                     conversion.setProgress(0.5);
