@@ -39,6 +39,17 @@ public class BLLManager implements IBLLFacade {
 
     @Override
     public void convert(ObservableList<Conversion> conversions, Config con) throws IOException {
+    public void convert(String text, String path, Config con) throws IOException {
+
+        List<Config> config = new ArrayList(dal.getConfig(con));
+        if (text.toLowerCase().endsWith(".xlsx") == true) {
+            convert.convert(dal.getIterator(text), config);
+        }
+        if (text.toLowerCase().endsWith(".csv") == true) {
+            convert.convert(dal.getCSV(text), config);
+        }
+        dal.write(convert.myJSONObjects, path, getName(text));
+    }
 
         for (Conversion conversion : conversions) {
             Thread t = new Thread(setTask(conversion, con));

@@ -41,4 +41,7 @@ public interface IDALFacade {
 
     public ObservableList getActivity();
 
+    public Iterator<Row> getCSV(String filepath);
+
+
 }
