@@ -121,15 +121,6 @@ public class BLLManager implements IBLLFacade {
                         Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-
-                try {
-                    conversion.setProgress(0.5);
-                    converter.convert(dal.getIterator(conversion.getFilePath()), config);
-                } catch (IOException ex) {
-                    Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 try {
                     dal.write(converter.myJSONObjects, conversion.getSavePath(), conversion.getFileName());
                     conversion.setProgress(1);
