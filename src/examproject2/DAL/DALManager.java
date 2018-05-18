@@ -11,6 +11,8 @@ import examproject2.BE.Key;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.usermodel.Row;
 import org.json.JSONArray;
@@ -20,7 +22,7 @@ import org.json.JSONArray;
  * @author Yindo
  */
 public class DALManager implements IDALFacade {
-    
+
     DatabaseDAO db = new DatabaseDAO();
     FileDAO file = new FileDAO();
 
@@ -28,12 +30,12 @@ public class DALManager implements IDALFacade {
     public List<Key> getConfig(Config config) {
         return db.getKeyWords(config);
     }
- 
+
     @Override
     public Iterator<Row> getIterator(String filepath) throws IOException {
         return file.getIterator(filepath);
     }
-    
+
     @Override
     public void write(JSONArray jsonFiles, String path, String name) throws IOException {
         file.write(jsonFiles, path, name);
@@ -54,7 +56,6 @@ public class DALManager implements IDALFacade {
         db.saveConfig(config);
     }
 
-
     @Override
     public void saveKey(Key key) {
         db.saveKey(key);
@@ -74,5 +75,17 @@ public class DALManager implements IDALFacade {
     public ObservableList getActivity() {
         return db.getActivities();
     }
-    
+
+    @Override
+    public Iterator<Row> getCSV(String filepath) {
+        Iterator<Row> itr = null;
+        try {
+            itr = file.getCSV(filepath);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return itr;
+    }
+
 }

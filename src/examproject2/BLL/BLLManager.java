@@ -26,23 +26,24 @@ public class BLLManager implements IBLLFacade {
     private static BLLManager INSTANCE;
     Converter convert = new Converter();
     IDALFacade dal = new DALManager();
-    
-    
-        public synchronized static BLLManager getInstance()
-    {
-        if (INSTANCE == null)
-        {
+
+    public synchronized static BLLManager getInstance() {
+        if (INSTANCE == null) {
             INSTANCE = new BLLManager();
         }
         return INSTANCE;
     }
-    
 
     @Override
     public void convert(String text, String path, Config con) throws IOException {
 
         List<Config> config = new ArrayList(dal.getConfig(con));
-        convert.convert(dal.getIterator(text), config);
+        if (text.toLowerCase().endsWith(".xlsx") == true) {
+            convert.convert(dal.getIterator(text), config);
+        }
+        if (text.toLowerCase().endsWith(".csv") == true) {
+            convert.convert(dal.getCSV(text), config);
+        }
         dal.write(convert.myJSONObjects, path, getName(text));
     }
 
@@ -67,10 +68,11 @@ public class BLLManager implements IBLLFacade {
         boolean proceed = true;
         try {
             dal.saveConfig(config);
-        } catch (NullPointerException e) {
+        }
+        catch (NullPointerException e) {
             proceed = false;
         }
-        
+
         if (proceed) {
             for (Key key : keys) {
                 key.setId(config.getId());
