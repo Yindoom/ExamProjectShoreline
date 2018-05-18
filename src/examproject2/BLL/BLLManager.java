@@ -8,8 +8,8 @@ package examproject2.BLL;
 import examproject2.BE.Activity;
 import examproject2.BE.Config;
 import examproject2.BE.Key;
-import static examproject2.BLL.Converter.filetype.xlsx;
 import examproject2.DAL.DALManager;
+import examproject2.DAL.IDALFacade;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +21,11 @@ import org.apache.commons.io.FilenameUtils;
  *
  * @author Bastian
  */
-public class BLLManager implements IBLLManager {
+public class BLLManager implements IBLLFacade {
 
     private static BLLManager INSTANCE;
     Converter convert = new Converter();
-    DALManager dal = new DALManager();
+    IDALFacade dal = new DALManager();
     
     
         public synchronized static BLLManager getInstance()
@@ -42,7 +42,7 @@ public class BLLManager implements IBLLManager {
     public void convert(String text, String path, Config con) throws IOException {
 
         List<Config> config = new ArrayList(dal.getConfig(con));
-        convert.convert(dal.getIterator(text), xlsx, config);
+        convert.convert(dal.getIterator(text), config);
         dal.write(convert.myJSONObjects, path, getName(text));
     }
 

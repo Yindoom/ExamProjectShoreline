@@ -16,7 +16,7 @@ import javafx.collections.ObservableList;
  *
  * @author Yindo
  */
-public interface IBLLManager {
+public interface IBLLFacade {
 
     public void convert(String text, String path, Config con) throws IOException;
 

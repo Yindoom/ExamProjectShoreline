@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextField;
 import org.apache.poi.ss.usermodel.Row;
 import org.json.JSONArray;
 
@@ -20,7 +19,7 @@ import org.json.JSONArray;
  *
  * @author Yindo
  */
-public class DALManager {
+public class DALManager implements IDALFacade {
     
     DatabaseDAO db = new DatabaseDAO();
     FileDAO file = new FileDAO();
@@ -28,7 +27,8 @@ public class DALManager {
     public List<Key> getConfig(Config config) {
         return db.getKeyWords(config);
     }
-    
+ 
+    @Override
     public Iterator<Row> getIterator(String filepath) throws IOException {
         return file.getIterator(filepath);
     }

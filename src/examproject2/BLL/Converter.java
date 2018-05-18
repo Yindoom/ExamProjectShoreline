@@ -30,14 +30,10 @@ public class Converter {
     JSONArray myJSONObjects = new JSONArray();
     List<Key> secondary;
 
-    public enum filetype {
-        xlsx,
-        xml
-    }
 
     //@author Bastian and Emil
     
-    public void convert(Iterator<Row> itr, filetype xlsx, List config) throws IOException {
+    public void convert(Iterator<Row> itr, List config) throws IOException {
 
         keys = config;
 

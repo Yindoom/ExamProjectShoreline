@@ -9,11 +9,11 @@ import examproject2.BE.Activity;
 import examproject2.BE.Config;
 import examproject2.BE.Key;
 import examproject2.BLL.BLLManager;
-import examproject2.BLL.IBLLManager;
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
+import examproject2.BLL.IBLLFacade;
 
 /**
  *
@@ -25,7 +25,7 @@ public class Model {
         bll = BLLManager.getInstance();
     }
 
-    IBLLManager bll;
+    IBLLFacade bll;
     
 
     public static Model getInstance() {

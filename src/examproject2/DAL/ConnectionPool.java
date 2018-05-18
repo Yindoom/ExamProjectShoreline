@@ -5,21 +5,66 @@
  */
 package examproject2.DAL;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import examproject2.BLL.BLLManager;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
- * @author Yindo
+ * @author pgn
  */
-public class ConnectionPool {
-    
-    private ConnectionPool() {
-    }
-    
-    public static ConnectionPool getInstance() {
-        return ConnectionPoolHolder.INSTANCE;
-    }
-    
-    private static class ConnectionPoolHolder {
+public class ConnectionPool extends ObjectPool<Connection> {
 
-        private static final ConnectionPool INSTANCE = new ConnectionPool();
+    private static ConnectionPool INSTANCE;
+    private Connection con;
+    private ConnectionManager connector;
+
+    public ConnectionPool() {
+        super();
+        connector = new ConnectionManager();
+
     }
+
+    @Override
+    public void expire(Connection o) {
+        try {
+            o.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean validate(Connection o) {
+        try {
+            return !o.isClosed();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    protected Connection create(){
+        try {
+            con = connector.getConnection();
+        } catch (SQLServerException ex) {
+            Logger.getLogger(ConnectionPool.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
+    }
+    
+            public synchronized static ConnectionPool getInstance()
+    {
+        if (INSTANCE == null)
+        {
+            INSTANCE = new ConnectionPool();
+        }
+        return INSTANCE;
+    }
+
 }
