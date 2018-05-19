@@ -5,6 +5,7 @@
  */
 package examproject2.BLL;
 
+import examproject2.BE.Conversion;
 import examproject2.BE.Key;
 import examproject2.BE.Header;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
 import static org.apache.poi.ss.usermodel.CellType.STRING;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,8 +33,11 @@ public class Converter {
     List<Key> secondary;
 
     //@author Bastian and Emil
-    public void convert(Iterator<Row> itr, List config) throws IOException, InterruptedException {
+    public void convert(Sheet sheet, List config, Conversion conversion) throws IOException, InterruptedException {
+        int rows = sheet.getLastRowNum();
 
+        Iterator<Row> itr = sheet.iterator();
+        
         keys = config;
 
         while (itr.hasNext()) {
@@ -75,7 +80,7 @@ public class Converter {
                 obj.put("Planning", planning);
                 myJSONObjects.put(obj);
             }
-
+            conversion.setProgress(row.getRowNum() / sheet.getLastRowNum());
         }
 
     }

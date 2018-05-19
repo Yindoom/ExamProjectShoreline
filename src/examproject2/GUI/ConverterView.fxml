@@ -29,7 +29,7 @@
       <Button layoutX="477.0" layoutY="118.0" mnemonicParsing="false" onAction="#btnFilePathSave" text="Browse" />
       <Label layoutX="14.0" layoutY="12.0" text="Current user:" />
       <Label fx:id="lblUser" layoutX="83.0" layoutY="12.0" prefHeight="17.0" prefWidth="52.0" />
-      <Button layoutX="377.0" layoutY="398.0" mnemonicParsing="false" text="Stop Convert" />
+      <Button layoutX="377.0" layoutY="398.0" mnemonicParsing="false" onAction="#clickStop" text="Stop Convert" />
       <Button layoutX="217.0" layoutY="163.0" mnemonicParsing="false" onAction="#addConversion" text="Add to Tasks" />
    </children>
 </AnchorPane>

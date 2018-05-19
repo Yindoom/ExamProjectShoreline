@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.json.JSONArray;
 
 /**
@@ -23,7 +24,7 @@ public interface IDALFacade {
 
     public List<Key> getConfig(Config config);
 
-    public Iterator<Row> getIterator(String filepath)throws IOException;
+    public Sheet getIterator(String filepath) throws IOException;
 
     public void write(JSONArray jsonFiles, String path, String name) throws IOException;
 
@@ -41,7 +42,6 @@ public interface IDALFacade {
 
     public ObservableList getActivity();
 
-    public Iterator<Row> getCSV(String filepath);
-
+    public Sheet getCSV(String filepath);
 
 }

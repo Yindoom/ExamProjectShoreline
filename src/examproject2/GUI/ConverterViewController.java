@@ -94,17 +94,9 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
-        try {
-           
-            model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
-          
-        } catch (NullPointerException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Something went wrong");
-            alert.setContentText("Please make sure you have chosen a file to convert, a configuration, and a save folder");
-            alert.show();
-        }
+
+        model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
+
     }
 
     @FXML
@@ -159,13 +151,20 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void addConversion(ActionEvent event) {
-        if(!txtPath.getText().isEmpty() && !txtSavePath.getText().isEmpty()) {
-        Conversion con = new Conversion();
-        con.setFileName(FilenameUtils.getBaseName(txtPath.getText()));
-        con.setFilePath(txtPath.getText());
-        con.setSavePath(txtSavePath.getText());
-        
-        tbvConversions.getItems().add(con);
+        if (!txtPath.getText().isEmpty() && !txtSavePath.getText().isEmpty()) {
+            Conversion con = new Conversion();
+            con.setFileName(FilenameUtils.getBaseName(txtPath.getText()));
+            con.setFilePath(txtPath.getText());
+            con.setSavePath(txtSavePath.getText());
+
+            tbvConversions.getItems().add(con);
+        }
+    }
+
+    @FXML
+    private void clickStop(ActionEvent event) {
+        for (Conversion con : tbvConversions.getItems()) {
+            con.getTask().interrupt();
         }
     }
 

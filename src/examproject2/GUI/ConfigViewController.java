@@ -8,6 +8,7 @@ package examproject2.GUI;
 import examproject2.BE.Activity;
 import examproject2.BE.Config;
 import examproject2.BE.Key;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -122,7 +128,7 @@ public class ConfigViewController implements Initializable {
     }
 
     @FXML
-    private void clickSave(ActionEvent event) {
+    private void clickSave(ActionEvent event) throws IOException {
         List<Key> keys = new ArrayList();
 
         keys.add(new Key("type"));
@@ -150,19 +156,19 @@ public class ConfigViewController implements Initializable {
                     proceed = false;
                 }
             }
-            if(proceed) {
+            if (proceed) {
 
-            Config config = new Config();
-            config.setFileType(fileType.getSelectionModel().getSelectedItem());
-            config.setName(configName.getText());
-            model.saveConfig(config, keys);
+                Config config = new Config();
+                config.setFileType(fileType.getSelectionModel().getSelectedItem());
+                config.setName(configName.getText());
+                model.saveConfig(config, keys);
 
-            Activity log = new Activity();
-            log.setSubject(configName.getText());
-            log.setName(user);
-            log.setType(activity);
+                Activity log = new Activity();
+                log.setSubject(configName.getText());
+                log.setName(user);
+                log.setType(activity);
 
-            model.saveActivity(log);
+                model.saveActivity(log);
             }
         } else {
             for (Key key : keys) {
@@ -179,6 +185,19 @@ public class ConfigViewController implements Initializable {
             model.saveActivity(log);
 
         }
+        Stage primaryStage = new Stage();
+        primaryStage.initModality(Modality.WINDOW_MODAL);
+        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("AdminSettingsView.fxml"));
+
+        Parent root = fxLoader.load();
+
+        Stage oldStage = (Stage) configName.getScene().getWindow();
+        oldStage.close();
+
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.showAndWait();
+
     }
 
     public void setConfig(Config selectedConfig) {
