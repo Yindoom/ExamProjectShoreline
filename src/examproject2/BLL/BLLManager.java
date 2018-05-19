@@ -101,33 +101,33 @@ public class BLLManager implements IBLLFacade {
                 Converter converter = new Converter();
                 List<Config> config = new ArrayList(dal.getConfig(con));
 
-                    try {
-                        converter.convert(getSheet(conversion.getFilePath()), config, conversion);
-                    } catch (IOException ex) {
-                        Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
                 try {
-                    dal.write(converter.myJSONObjects, conversion.getSavePath(), conversion.getFileName());
-                    
+                    converter.convert(getSheet(conversion.getFilePath()), config, conversion);
                 } catch (IOException ex) {
                     Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                } 
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+                    dal.write(converter.myJSONObjects, conversion.getSavePath(), conversion.getFileName());
+
+                } catch (IOException ex) {
+                    Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
         return runCon;
     }
-    
+
     public Sheet getSheet(String path) throws IOException {
         Sheet sheet = null;
-        if(path.endsWith(".csv")) {
+        if (path.endsWith(".csv")) {
             sheet = dal.getCSV(path);
         }
-        if(path.endsWith(".xlsx")) {
+        if (path.endsWith(".xlsx")) {
             sheet = dal.getIterator(path);
         }
-      return sheet;
+        return sheet;
     }
 }
