@@ -28,14 +28,14 @@ import org.json.JSONArray;
  */
 public class FileDAO {
 
-    public Iterator<Row> getIterator(String text) throws FileNotFoundException, IOException {
+    public Sheet getExcel(String text) throws FileNotFoundException, IOException {
 
         File excel = new File(text);
         FileInputStream fis = new FileInputStream(excel);
         XSSFWorkbook book = new XSSFWorkbook(fis);
         XSSFSheet sheet = book.getSheetAt(0);
 
-        return sheet.iterator();
+        return sheet;
     }
 
     public void write(JSONArray jsonFiles, String path, String name) throws IOException {
@@ -47,7 +47,7 @@ public class FileDAO {
         }
     }
 
-    public Iterator<Row> getCSV(String text) throws FileNotFoundException, IOException {
+    public Sheet getCSV(String text) throws FileNotFoundException, IOException {
         Workbook wb = new HSSFWorkbook();
         CreationHelper helper = wb.getCreationHelper();
         Sheet sheet = wb.createSheet("new sheet");
@@ -63,6 +63,6 @@ public class FileDAO {
                         .setCellValue(helper.createRichTextString(line[i]));
             }
         }
-        return sheet.iterator();
+        return sheet;
     }
 }

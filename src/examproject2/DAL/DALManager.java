@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.json.JSONArray;
 
 /**
@@ -32,8 +33,8 @@ public class DALManager implements IDALFacade {
     }
 
     @Override
-    public Iterator<Row> getIterator(String filepath) throws IOException {
-        return file.getIterator(filepath);
+    public Sheet getIterator(String filepath) throws IOException {
+        return file.getExcel(filepath);
     }
 
     @Override
@@ -77,15 +78,14 @@ public class DALManager implements IDALFacade {
     }
 
     @Override
-    public Iterator<Row> getCSV(String filepath) {
-        Iterator<Row> itr = null;
+    public Sheet getCSV(String filepath) {
+        Sheet sheet = null;
         try {
-            itr = file.getCSV(filepath);
-        }
-        catch (IOException ex) {
+            sheet = file.getCSV(filepath);
+        } catch (IOException ex) {
             Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return itr;
+        return sheet;
     }
 
 }

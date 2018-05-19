@@ -13,13 +13,13 @@ import examproject2.DAL.DALManager;
 import examproject2.DAL.IDALFacade;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
-import static javafx.scene.control.Pagination.INDETERMINATE;
-import javafx.scene.control.TextField;
-import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 
 /**
  *
@@ -39,8 +39,6 @@ public class BLLManager implements IBLLFacade {
 
     @Override
     public void convert(ObservableList<Conversion> conversions, Config con) throws IOException {
-
-        List<Config> config = new ArrayList(dal.getConfig(con));
 
         for (Conversion conversion : conversions) {
             Thread t = new Thread(setTask(conversion, con));
@@ -103,33 +101,14 @@ public class BLLManager implements IBLLFacade {
                 Converter converter = new Converter();
                 List<Config> config = new ArrayList(dal.getConfig(con));
 
-                if (conversion.getFilePath().toLowerCase().endsWith(".xlsx") == true) {
                     try {
-                        converter.convert(dal.getIterator(conversion.getFilePath()), config);
+                        converter.convert(getSheet(conversion.getFilePath()), config, conversion);
                     } catch (IOException ex) {
                         Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-                if (conversion.getFilePath().toLowerCase().endsWith(".csv") == true) {
-                    try {
-                        converter.convert(dal.getCSV(conversion.getFilePath()), config);
-                    } catch (IOException ex) {
-                        Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
 
-                try {
-                    conversion.setProgress(0.5);
-                    converter.convert(dal.getIterator(conversion.getFilePath()), config);
-                } catch (IOException ex) {
-                    Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 try {
                     dal.write(converter.myJSONObjects, conversion.getSavePath(), conversion.getFileName());
                     conversion.setProgress(1);
@@ -139,5 +118,16 @@ public class BLLManager implements IBLLFacade {
             }
         };
         return runCon;
+    }
+    
+    public Sheet getSheet(String path) throws IOException {
+        Sheet sheet = null;
+        if(path.endsWith(".csv")) {
+            sheet = dal.getCSV(path);
+        }
+        if(path.endsWith(".xlsx")) {
+            sheet = dal.getIterator(path);
+        }
+      return sheet;
     }
 }
