@@ -161,4 +161,11 @@ public class ConverterViewController implements Initializable {
         }
     }
 
+    @FXML
+    private void clickStop(ActionEvent event) {
+        for (Conversion con : tbvConversions.getItems()) {
+            con.getTask().interrupt();
+        }
+    }
+
 }

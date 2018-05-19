@@ -13,12 +13,10 @@ import examproject2.DAL.DALManager;
 import examproject2.DAL.IDALFacade;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 /**
@@ -44,6 +42,8 @@ public class BLLManager implements IBLLFacade {
             Thread t = new Thread(setTask(conversion, con));
             t.setDaemon(true);
             conversion.setTask(t);
+        }
+        for (Conversion conversion : conversions) {
             conversion.getTask().start();
         }
     }
@@ -110,15 +110,11 @@ public class BLLManager implements IBLLFacade {
                     }
 
                 try {
-                    conversion.setProgress(0.5);
-                    Thread.sleep(5000);
                     dal.write(converter.myJSONObjects, conversion.getSavePath(), conversion.getFileName());
-                    conversion.setProgress(1);
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } 
             }
         };
         return runCon;

@@ -36,11 +36,8 @@ public class Converter {
     public void convert(Sheet sheet, List config, Conversion conversion) throws IOException, InterruptedException {
         int rows = sheet.getLastRowNum();
 
-        double progress = (rows / rows) * 0.9;
-
-        conversion.setProgress(progress);
-
         Iterator<Row> itr = sheet.iterator();
+        
         keys = config;
 
         while (itr.hasNext()) {
@@ -83,7 +80,7 @@ public class Converter {
                 obj.put("Planning", planning);
                 myJSONObjects.put(obj);
             }
-            conversion.setProgress(conversion.getProgress() + progress);
+            conversion.setProgress(row.getRowNum() / sheet.getLastRowNum());
         }
 
     }
