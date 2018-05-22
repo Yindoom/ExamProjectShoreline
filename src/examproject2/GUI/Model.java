@@ -33,7 +33,7 @@ public class Model {
         return ModelHolder.INSTANCE;
     }
 
-    void convert(ObservableList<Conversion> con, Config config) throws IOException {
+    public void convert(ObservableList<Conversion> con, Config config) throws IOException {
         bll.convert(con, config);
     }
 

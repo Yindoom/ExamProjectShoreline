@@ -5,6 +5,7 @@
  */
 package examproject2.GUI;
 
+import examproject2.BE.Activity;
 import examproject2.BE.Config;
 import examproject2.BE.Conversion;
 import java.io.File;
@@ -104,6 +105,17 @@ public class ConverterViewController implements Initializable {
             alert.setHeaderText("Out of memory");
             alert.showAndWait();
         }
+    private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
+        for (Conversion con : tbvConversions.getItems()) {
+            Activity log = new Activity();
+            log.setSubject(con.getFileName());
+            log.setName(currentUser);
+            log.setType("Convert");
+            model.saveActivity(log);
+
+        }
+
+        model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
     }
 
     @FXML
