@@ -15,6 +15,5 @@
         </Button>
         <TextField fx:id="txtName" layoutX="19.0" layoutY="23.0" prefHeight="25.0" prefWidth="186.0" />
         <Label fx:id="lblName" layoutX="96.0" layoutY="6.0" text="Name" />
-        <fx:include source="ConverterView.fxml" />
     </children>
 </AnchorPane>

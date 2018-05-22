@@ -97,15 +97,6 @@ public class ConverterViewController implements Initializable {
 
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException, OutOfMemoryError {
-        try {
-            model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
-        } catch (OutOfMemoryError e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("A file is too big, and cannot be converted");
-            alert.setHeaderText("Out of memory");
-            alert.showAndWait();
-        }
-    private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
         for (Conversion con : tbvConversions.getItems()) {
             Activity log = new Activity();
             log.setSubject(con.getFileName());
