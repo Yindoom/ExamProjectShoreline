@@ -161,8 +161,7 @@ public class MainWindowController implements Initializable {
     private TextField timeSec;
     @FXML
     private TextField timeDef;
-    @FXML
-    private ComboBox<String> fileType;
+    
     /////////////////////////////////////
     
     @FXML
@@ -291,6 +290,7 @@ public class MainWindowController implements Initializable {
         Config selectedConfig
                 = lstConfiguration.getSelectionModel().getSelectedItem();
         setConfig(selectedConfig);
+        setUser(currentUser, "Edit");
         setPane.toFront();
         /*Stage primaryStage = new Stage();
         primaryStage.initModality(Modality.WINDOW_MODAL);
@@ -328,18 +328,14 @@ public class MainWindowController implements Initializable {
         primaryStage.showAndWait();*/
         
         setPane.toFront();
-        
+        setUser(currentUser, "Add");
 
     }
     ////////////////////////////
     
     public void setUser(String currentUser, String activity) {
-        ObservableList<String> files = FXCollections.observableArrayList();
-        files.add("xlsx");
-        files.add("csv");
         user = currentUser;
         this.activity = activity;
-        fileType.setItems(files);
     }
 
     @FXML
@@ -373,10 +369,10 @@ public class MainWindowController implements Initializable {
             }
             if (proceed) {
 
-                Config config = new Config();
+                /*Config config = new Config();
                 config.setFileType(fileType.getSelectionModel().getSelectedItem());
                 config.setName(configName.getText());
-                model.saveConfig(config, keys);
+                model.saveConfig(config, keys);*/
 
                 Activity log = new Activity();
                 log.setSubject(configName.getText());
