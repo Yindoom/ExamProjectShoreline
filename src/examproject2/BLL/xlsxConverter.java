@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javafx.scene.control.Alert;
 import org.apache.poi.ss.usermodel.Cell;
 import static org.apache.poi.ss.usermodel.CellType.STRING;
 import org.apache.poi.ss.usermodel.Row;
@@ -25,7 +26,7 @@ import org.json.JSONObject;
  *
  * @author Yindo
  */
-public class Converter {
+public class xlsxConverter {
 
     List<Header> headers = new ArrayList();
     List<Key> keys;
@@ -37,7 +38,7 @@ public class Converter {
         int rows = sheet.getLastRowNum();
 
         Iterator<Row> itr = sheet.iterator();
-        
+
         keys = config;
 
         while (itr.hasNext()) {
@@ -80,7 +81,7 @@ public class Converter {
                 obj.put("Planning", planning);
                 myJSONObjects.put(obj);
             }
-            conversion.setProgress(row.getRowNum() / sheet.getLastRowNum());
+            conversion.setProgress(row.getRowNum() / rows* 0.9);
         }
 
     }
@@ -102,9 +103,8 @@ public class Converter {
         }
     }
 
-    private void getHeaders(Cell cell) {                                        //Here we go through the entire first row, to find all headers
-        //and add them to a list, so we can compare them to 
-        Header newheader = new Header();                                        //our keys
+    private void getHeaders(Cell cell) {                                        //Here we go through the entire first row, to find all headers                                                                      
+        Header newheader = new Header();                                        //and add them to a list, so we can compare them to our keys
         newheader.setIndex(cell.getColumnIndex());
         newheader.setValue(cell.getStringCellValue());
         int n = 1;

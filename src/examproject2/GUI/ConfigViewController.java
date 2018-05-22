@@ -13,8 +13,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -107,8 +104,6 @@ public class ConfigViewController implements Initializable {
     private TextField timeSec;
     @FXML
     private TextField timeDef;
-    @FXML
-    private ComboBox<String> fileType;
 
     /**
      * Initializes the controller class.
@@ -119,12 +114,8 @@ public class ConfigViewController implements Initializable {
     }
 
     public void setUser(String currentUser, String activity) {
-        ObservableList<String> files = FXCollections.observableArrayList();
-        files.add("xlsx");
-        files.add("csv");
         user = currentUser;
         this.activity = activity;
-        fileType.setItems(files);
     }
 
     @FXML
@@ -159,7 +150,6 @@ public class ConfigViewController implements Initializable {
             if (proceed) {
 
                 Config config = new Config();
-                config.setFileType(fileType.getSelectionModel().getSelectedItem());
                 config.setName(configName.getText());
                 model.saveConfig(config, keys);
 
@@ -190,13 +180,15 @@ public class ConfigViewController implements Initializable {
         FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("AdminSettingsView.fxml"));
 
         Parent root = fxLoader.load();
+        AdminSettingsViewController asv = fxLoader.getController();
+        asv.setUser(user);
 
         Stage oldStage = (Stage) configName.getScene().getWindow();
         oldStage.close();
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.showAndWait();
+        primaryStage.show();
 
     }
 

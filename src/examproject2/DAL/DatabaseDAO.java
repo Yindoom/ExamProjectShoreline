@@ -27,8 +27,7 @@ import javafx.collections.ObservableList;
  */
 public class DatabaseDAO {
 
-    private static ConnectionPool conPool = ConnectionPool.getInstance();
-
+    ConnectionPool conPool = ConnectionPool.getInstance();
     public List<Key> getKeyWords(Config configuration) {
         List<Key> configs
                 = new ArrayList();
@@ -80,17 +79,16 @@ public class DatabaseDAO {
         try (Connection con = conPool.checkOut()) {
             String sql
                     = "INSERT INTO Configs"
-                    + "(name, filetype) "
-                    + "VALUES(?,?)";
+                    + "(name) "
+                    + "VALUES(?)";
             PreparedStatement pstmt
                     = con.prepareStatement(
                             sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, config.getName());
-            pstmt.setString(2, config.getFileType());
 
             int affected = pstmt.executeUpdate();
             if (affected < 1) {
-                throw new SQLException("movie could not be added");
+                throw new SQLException("config could not be added");
             }
 
             // Get database generated id

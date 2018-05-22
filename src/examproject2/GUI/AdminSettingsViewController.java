@@ -59,25 +59,25 @@ public class AdminSettingsViewController implements Initializable {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.showAndWait();
+        primaryStage.show();
     }
 
     @FXML
     private void btnAdd(ActionEvent event) throws IOException {
-        Stage primaryStage = new Stage();
-        primaryStage.initModality(Modality.WINDOW_MODAL);
+        Stage primaryStage = (Stage) lstConfiguration.getScene().getWindow();
+      //  primaryStage.initModality(Modality.);
         FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ConfigView.fxml"));
 
         Parent root = fxLoader.load();
         ConfigViewController cvc = fxLoader.getController();
         cvc.setUser(currentUser, "Add");
 
-        Stage oldStage = (Stage) lstConfiguration.getScene().getWindow();
-        oldStage.close();
+//        Stage oldStage = (Stage) lstConfiguration.getScene().getWindow();
+//        oldStage.close();
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.showAndWait();
+        primaryStage.show();
 
     }
 

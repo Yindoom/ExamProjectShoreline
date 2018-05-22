@@ -8,12 +8,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="85.0" prefWidth="224.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.MainViewController">
     <children>
-      <Button fx:id="loginButton" layoutX="87.0" layoutY="54.0" onAction="#handleLogin" prefHeight="25.0" prefWidth="50.0" text="Login">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Button>
-      <TextField fx:id="txtName" layoutX="19.0" layoutY="23.0" prefHeight="25.0" prefWidth="186.0" />
-      <Label fx:id="lblName" layoutX="96.0" layoutY="6.0" text="Name" />
+        <Button fx:id="loginButton" layoutX="87.0" layoutY="54.0" onAction="#handleLogin" prefHeight="25.0" prefWidth="50.0" text="Login">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </Button>
+        <TextField fx:id="txtName" layoutX="19.0" layoutY="23.0" prefHeight="25.0" prefWidth="186.0" />
+        <Label fx:id="lblName" layoutX="96.0" layoutY="6.0" text="Name" />
+        <fx:include source="ConverterView.fxml" />
     </children>
 </AnchorPane>

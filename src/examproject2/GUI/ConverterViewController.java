@@ -34,6 +34,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import examproject2.GUI.AdminSettingsViewController;
 
 /**
  * FXML Controller class
@@ -90,13 +91,19 @@ public class ConverterViewController implements Initializable {
             Stringpath = filePath.getAbsolutePath();
         }
         txtPath.setText(Stringpath);
+
     }
 
     @FXML
-    private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
-
-        model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
-
+    private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException, OutOfMemoryError {
+        try {
+            model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
+        } catch (OutOfMemoryError e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("A file is too big, and cannot be converted");
+            alert.setHeaderText("Out of memory");
+            alert.showAndWait();
+        }
     }
 
     @FXML

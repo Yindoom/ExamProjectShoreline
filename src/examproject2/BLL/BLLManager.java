@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import org.apache.poi.ss.usermodel.Sheet;
 
 /**
@@ -25,6 +26,7 @@ import org.apache.poi.ss.usermodel.Sheet;
  */
 public class BLLManager implements IBLLFacade {
 
+    ThreadPool threads = ThreadPool.getInstance();
     private static BLLManager INSTANCE;
     IDALFacade dal = new DALManager();
 
@@ -39,12 +41,26 @@ public class BLLManager implements IBLLFacade {
     public void convert(ObservableList<Conversion> conversions, Config con) throws IOException {
 
         for (Conversion conversion : conversions) {
-            Thread t = new Thread(setTask(conversion, con));
+            try{
+                Thread t = new Thread(setTask(conversion, con));
             t.setDaemon(true);
             conversion.setTask(t);
+            } catch(NullPointerException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("No config");
+                alert.setContentText("Please select a configuration");
+                alert.showAndWait();
+            }
         }
         for (Conversion conversion : conversions) {
             conversion.getTask().start();
+        }
+        for (Conversion conversion : conversions) {
+            try {
+                conversion.getTask().join();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -98,7 +114,7 @@ public class BLLManager implements IBLLFacade {
         Runnable runCon = new Runnable() {
             @Override
             public void run() {
-                Converter converter = new Converter();
+                xlsxConverter converter = new xlsxConverter();
                 List<Config> config = new ArrayList(dal.getConfig(con));
 
                 try {
@@ -111,7 +127,7 @@ public class BLLManager implements IBLLFacade {
 
                 try {
                     dal.write(converter.myJSONObjects, conversion.getSavePath(), conversion.getFileName());
-
+                    conversion.setProgress(1);
                 } catch (IOException ex) {
                     Logger.getLogger(BLLManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
