@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="467.0" prefWidth="820.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.MainWindowController">
+    <stylesheets>
+        <URL value="@mainwindow.css" />
+    </stylesheets>
+   <children>
+      <VBox layoutX="1.0" prefHeight="463.0" prefWidth="111.0">
+         <children>
+            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#clickHome" prefHeight="115.0" prefWidth="117.0" text="home" />
+            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#clickLogs" prefHeight="115.0" prefWidth="117.0" text="logs" />
+            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#clickSetting" prefHeight="115.0" prefWidth="117.0" text="settings" />
+         </children>
+      </VBox>
+      <StackPane layoutX="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ScrollPane fx:id="logPane" prefHeight="467.0" prefWidth="699.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="462.0" prefWidth="700.0">
+                     <children>
+                        <TableView fx:id="lstActivity" prefHeight="462.0" prefWidth="699.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-210.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="colSub" prefWidth="244.0" text="Config/File" />
+                              <TableColumn fx:id="colUse" prefWidth="194.0" text="User" />
+                              <TableColumn fx:id="colAct" prefWidth="258.0" text="Type of activity" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <ScrollPane fx:id="setPane" prefHeight="467.0" prefWidth="694.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="799.0" prefWidth="678.0">
+                     <children>
+                        <VBox prefHeight="758.0" prefWidth="768.0">
+                           <children>
+                              <Label text="Name of configuration">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="configName" prefHeight="31.0" prefWidth="426.0">
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="177.0" prefWidth="696.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="type" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="typeKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="typeSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="typeDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="externalWorkOrderId" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="externalKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="externalSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="externalDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="systemStatus" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="sysKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="sysSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="sysDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="userStatus" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="userKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="userSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="userDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="177.0" prefWidth="685.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="name" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="nameKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="nameSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="nameDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="priority" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="priorityKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="prioritySec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="priorityDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="status" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="statusKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="statusSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="statusDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Label text="Planning">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="177.0" prefWidth="717.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="latestFinishDate" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="finishKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="finishSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="finishDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="earliestStartDate" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="earlyStartKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="earlyStartSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="earlyStartDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="latestStartDate" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="lateStartKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="lateStartSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="lateStartDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                       <children>
+                                          <Label text="estimatedTime" />
+                                          <Label text="Keyword" />
+                                          <TextField fx:id="timeKey" />
+                                          <Label text="Secondary Keyword" />
+                                          <TextField fx:id="timeSec" />
+                                          <Label text="Default value" />
+                                          <TextField fx:id="timeDef" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Button mnemonicParsing="false" onAction="#clickSave" text="Save config">
+                                 <VBox.margin>
+                                    <Insets left="575.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <ScrollPane fx:id="settingPane" prefHeight="467.0" prefWidth="699.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="689.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnEdit" text="Edit Config" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                        <ListView fx:id="lstConfiguration" prefHeight="373.0" prefWidth="543.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" />
+                        <Button mnemonicParsing="false" onAction="#btnAdd" text="Add Config" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="50.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <ScrollPane fx:id="homePane" pannable="true" prefHeight="467.0" prefWidth="699.0">
+              <content>
+                <AnchorPane prefHeight="577.0" prefWidth="680.0">
+                     <children>
+                        <ComboBox fx:id="cbmSettings" layoutX="16.0" layoutY="61.0" prefHeight="31.0" prefWidth="145.0" promptText="Select config" />
+                        <TableView fx:id="tbvConversions" layoutX="16.0" layoutY="255.0" prefHeight="190.0" prefWidth="649.0">
+                           <columns>
+                              <TableColumn fx:id="convertName" prefWidth="195.0" text="Tasks" />
+                              <TableColumn fx:id="convertProgress" minWidth="0.0" prefWidth="251.0" text="Progress" />
+                              <TableColumn fx:id="convertPath" prefWidth="202.0" text="File Path" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="15.0" layoutY="131.0" text="File path :" />
+                        <TextField fx:id="txtPath" layoutX="73.0" layoutY="127.0" prefHeight="25.0" prefWidth="505.0" />
+                        <Button layoutX="601.0" layoutY="127.0" mnemonicParsing="false" onAction="#btnFilePath" prefHeight="25.0" prefWidth="65.0" text="Browse" />
+                        <Button layoutX="83.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnConvert" prefHeight="25.0" prefWidth="139.0" text="Start Convert" AnchorPane.rightAnchor="400.0" />
+                        <Label layoutX="20.0" layoutY="168.0" text="Save to:" />
+                        <TextField fx:id="txtSavePath" layoutX="73.0" layoutY="164.0" prefHeight="25.0" prefWidth="505.0" />
+                        <Button layoutX="600.0" layoutY="164.0" mnemonicParsing="false" onAction="#btnFilePathSave" prefHeight="25.0" prefWidth="67.0" text="Browse" />
+                        <Label layoutX="15.0" layoutY="26.0" text="Current user:" />
+                        <Label fx:id="lblUser" layoutX="88.0" layoutY="26.0" prefHeight="17.0" prefWidth="52.0" />
+                        <Button layoutX="288.0" layoutY="489.0" mnemonicParsing="false" onAction="#clickStop" text="Stop Convert" AnchorPane.rightAnchor="200.0" />
+                        <Button layoutX="272.0" layoutY="220.0" mnemonicParsing="false" onAction="#addConversion" prefHeight="25.0" prefWidth="146.0" text="Add to Tasks" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

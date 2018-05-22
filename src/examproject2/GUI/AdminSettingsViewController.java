@@ -59,7 +59,7 @@ public class AdminSettingsViewController implements Initializable {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.showAndWait();
+        primaryStage.show();
     }
 
     @FXML
@@ -77,7 +77,7 @@ public class AdminSettingsViewController implements Initializable {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.showAndWait();
+        primaryStage.show();
 
     }
 

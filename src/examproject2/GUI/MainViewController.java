@@ -44,6 +44,23 @@ public class MainViewController implements Initializable {
         if (!txtName.getText().isEmpty()) {
             Stage primaryStage = new Stage();
             primaryStage.initModality(Modality.WINDOW_MODAL);
+            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+
+            Parent root = fxLoader.load();
+            MainWindowController cvc = fxLoader.getController();
+            cvc.setUser(txtName.getText());
+
+            Stage oldStage = (Stage) loginButton.getScene().getWindow();
+            oldStage.close();
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.showAndWait();
+        }
+        
+        /*if (!txtName.getText().isEmpty()) {
+            Stage primaryStage = new Stage();
+            primaryStage.initModality(Modality.WINDOW_MODAL);
             FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ConverterView.fxml"));
 
             Parent root = fxLoader.load();
@@ -56,6 +73,6 @@ public class MainViewController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.showAndWait();
-        }
+        }*/
     }
 }
