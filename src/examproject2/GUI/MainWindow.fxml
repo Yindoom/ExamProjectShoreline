@@ -30,21 +30,6 @@
       </VBox>
       <StackPane layoutX="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ScrollPane fx:id="logPane" prefHeight="467.0" prefWidth="699.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="462.0" prefWidth="700.0">
-                     <children>
-                        <TableView fx:id="lstActivity" prefHeight="462.0" prefWidth="699.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-210.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn fx:id="colSub" prefWidth="244.0" text="Config/File" />
-                              <TableColumn fx:id="colUse" prefWidth="194.0" text="User" />
-                              <TableColumn fx:id="colAct" prefWidth="258.0" text="Type of activity" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
             <ScrollPane fx:id="setPane" prefHeight="467.0" prefWidth="694.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="799.0" prefWidth="678.0">
@@ -269,6 +254,21 @@
                         <Button mnemonicParsing="false" onAction="#btnEdit" text="Edit Config" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
                         <ListView fx:id="lstConfiguration" prefHeight="373.0" prefWidth="543.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" />
                         <Button mnemonicParsing="false" onAction="#btnAdd" text="Add Config" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="50.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <ScrollPane fx:id="logPane" prefHeight="467.0" prefWidth="699.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="694.0">
+                     <children>
+                        <TableView fx:id="lstActivity" prefHeight="462.0" prefWidth="699.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-210.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="colSub" prefWidth="244.0" text="Config/File" />
+                              <TableColumn fx:id="colUse" prefWidth="194.0" text="User" />
+                              <TableColumn fx:id="colAct" prefWidth="258.0" text="Type of activity" />
+                           </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
               </content>

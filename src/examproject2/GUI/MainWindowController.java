@@ -292,40 +292,13 @@ public class MainWindowController implements Initializable {
         setConfig(selectedConfig);
         setUser(currentUser, "Edit");
         setPane.toFront();
-        /*Stage primaryStage = new Stage();
-        primaryStage.initModality(Modality.WINDOW_MODAL);
-        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ConfigView.fxml"));
-
-        Parent root = fxLoader.load();
-        ConfigViewController cvc = fxLoader.getController();
-        cvc.setUser(currentUser, "Edit");
-        cvc.setConfig(selectedConfig);
-
-        Stage oldStage = (Stage) lstConfiguration.getScene().getWindow();
-        oldStage.close();
-
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.showAndWait();*/
         
     }
 
     @FXML
     private void btnAdd(ActionEvent event) throws IOException {
-        /*Stage primaryStage = new Stage();
-        primaryStage.initModality(Modality.WINDOW_MODAL);
-        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ConfigView.fxml"));
-
-        Parent root = fxLoader.load();
-        ConfigViewController cvc = fxLoader.getController();
-        cvc.setUser(currentUser, "Add");
-
-        Stage oldStage = (Stage) lstConfiguration.getScene().getWindow();
-        oldStage.close();
-
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.showAndWait();*/
+        
+        
         
         setPane.toFront();
         setUser(currentUser, "Add");
@@ -396,18 +369,7 @@ public class MainWindowController implements Initializable {
             model.saveActivity(log);
 
         }
-        /*Stage primaryStage = new Stage();
-        primaryStage.initModality(Modality.WINDOW_MODAL);
-        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("AdminSettingsView.fxml"));
-
-        Parent root = fxLoader.load();
-
-        Stage oldStage = (Stage) configName.getScene().getWindow();
-        oldStage.close();
-
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.showAndWait();*/
+        
         settingPane.toFront();
 
     }
