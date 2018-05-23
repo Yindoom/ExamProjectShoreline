@@ -26,6 +26,7 @@
             <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#clickHome" prefHeight="115.0" prefWidth="117.0" text="home" />
             <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#clickLogs" prefHeight="115.0" prefWidth="117.0" text="logs" />
             <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#clickSetting" prefHeight="115.0" prefWidth="117.0" text="settings" />
+            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#clickLogOff" prefHeight="115.0" prefWidth="117.0" text="log out" />
          </children>
       </VBox>
       <StackPane layoutX="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -34,7 +35,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="799.0" prefWidth="678.0">
                      <children>
-                        <VBox prefHeight="758.0" prefWidth="768.0">
+                        <VBox fx:id="logAnchor" prefHeight="758.0" prefWidth="768.0">
                            <children>
                               <Label text="Name of configuration">
                                  <VBox.margin>
