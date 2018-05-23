@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -34,6 +35,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ProgressBarTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -46,18 +49,14 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
  *
  * @author Fábio
  */
-
 public class MainWindowController implements Initializable {
 
     Model model = Model.getInstance();
-    
+
     String currentUser;
-    
-    
+
     @FXML
     private ComboBox<Config> cbmSettings;
-    @FXML
-    private Button admConfig;
     @FXML
     private TableView<Conversion> tbvConversions;
     @FXML
@@ -84,11 +83,11 @@ public class MainWindowController implements Initializable {
     @FXML
     private TableColumn<Activity, String> colSub;
     ///////////////////////
-    
+
     @FXML
     private ListView<Config> lstConfiguration;
     /////////////////
-    
+
     Boolean edit = false;
     String activity;
     String user;
@@ -161,15 +160,16 @@ public class MainWindowController implements Initializable {
     private TextField timeSec;
     @FXML
     private TextField timeDef;
-    
+
     /////////////////////////////////////
-    
     @FXML
     private ScrollPane logPane;
     @FXML
     private ScrollPane settingPane;
     @FXML
     private ScrollPane setPane;
+    @FXML
+    private VBox logAnchor;
 
     /**
      * Initializes the controller class.
@@ -183,23 +183,21 @@ public class MainWindowController implements Initializable {
                 .setCellFactory(ProgressBarTableCell.<Conversion>forTableColumn());
         convertPath.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().filePathProperty());
         setConfigs();
-        
+
         colUse.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().nameProperty());
         colAct.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().typeProperty());
         colSub.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().subjectProperty());
-        lstActivity.setItems(model.getActivity()); 
-        
+        lstActivity.setItems(model.getActivity());
+
         lstConfiguration.getItems().setAll(model.getConfigs());
-        
-        cbmSettings.setPromptText("Standard");
         // TODO
-    }    
+    }
 
     public void setUser(String user) {
         lblUser.setText(user);
         this.currentUser = user;
     }
-    
+
     @FXML
     private void btnFilePath(ActionEvent event) {
         String Stringpath = null;
@@ -216,40 +214,22 @@ public class MainWindowController implements Initializable {
     @FXML
     private void btnConvert(ActionEvent event) throws IOException, InvalidFormatException {
 
+        for (Conversion con : tbvConversions.getItems()) {
+            Activity log = new Activity();
+            log.setSubject(con.getFileName());
+            log.setName(currentUser);
+            log.setType("Convert");
+            model.saveActivity(log);
+
+        }
+
         model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
 
     }
 
-    @FXML
-    private void Configure(ActionEvent event) throws IOException {
-        Stage primaryStage = new Stage();
-        primaryStage.initModality(Modality.WINDOW_MODAL);
-        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("AdminSettingsView.fxml"));
-
-        Parent root = fxLoader.load();
-        AdminSettingsViewController ctrl = fxLoader.getController();
-        ctrl.setUser(currentUser);
-
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.showAndWait();
-    }
-
-    @FXML
-    private void btnActivity(ActionEvent event) throws IOException {
-        Stage primaryStage = new Stage();
-        primaryStage.initModality(Modality.WINDOW_MODAL);
-        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ActivityView.fxml"));
-
-        Parent root = fxLoader.load();
-
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.showAndWait();
-    }
-
     private void setConfigs() {
         cbmSettings.getItems().setAll(model.getConfigs());
+        cbmSettings.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -283,29 +263,87 @@ public class MainWindowController implements Initializable {
             con.getTask().interrupt();
         }
     }
-    
+
     //////////////////////////
     @FXML
     private void btnEdit(ActionEvent event) throws IOException {
+
+        ObservableList<Node> logNodes = logAnchor.getChildren();
+
+        for (Node logNode : logNodes) {
+
+            if (logNode.getClass() == HBox.class) {
+                HBox hbox = (HBox) logNode;
+                ObservableList<Node> hboxChildren = hbox.getChildren();
+
+                for (Node node : hboxChildren) {
+                    if (node.getClass() == TextField.class) {
+                        TextField text = (TextField) node;
+                        text.clear();
+                    }
+
+                    if (node.getClass() == VBox.class) {
+                        VBox vbox = (VBox) node;
+                        ObservableList<Node> vboxChildren = vbox.getChildren();
+
+                        for (Node node2 : vboxChildren) {
+                            if (node2.getClass() == TextField.class) {
+                                TextField text = (TextField) node2;
+                                text.clear();
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
         Config selectedConfig
                 = lstConfiguration.getSelectionModel().getSelectedItem();
         setConfig(selectedConfig);
         setUser(currentUser, "Edit");
         setPane.toFront();
-        
+
     }
 
     @FXML
     private void btnAdd(ActionEvent event) throws IOException {
-        
-        
-        
+        ObservableList<Node> logNodes = logAnchor.getChildren();
+
+        for (Node logNode : logNodes) {
+
+            if (logNode.getClass() == HBox.class) {
+                HBox hbox = (HBox) logNode;
+                ObservableList<Node> hboxChildren = hbox.getChildren();
+
+                for (Node node : hboxChildren) {
+                    if (node.getClass() == TextField.class) {
+                        TextField text = (TextField) node;
+                        text.clear();
+                    }
+
+                    if (node.getClass() == VBox.class) {
+                        VBox vbox = (VBox) node;
+                        ObservableList<Node> vboxChildren = vbox.getChildren();
+
+                        for (Node node2 : vboxChildren) {
+                            if (node2.getClass() == TextField.class) {
+                                TextField text = (TextField) node2;
+                                text.clear();
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
         setPane.toFront();
         setUser(currentUser, "Add");
 
     }
     ////////////////////////////
-    
+
     public void setUser(String currentUser, String activity) {
         user = currentUser;
         this.activity = activity;
@@ -342,10 +380,10 @@ public class MainWindowController implements Initializable {
             }
             if (proceed) {
 
-                /*Config config = new Config();
-                config.setFileType(fileType.getSelectionModel().getSelectedItem());
+                Config config = new Config();
+
                 config.setName(configName.getText());
-                model.saveConfig(config, keys);*/
+                model.saveConfig(config, keys);
 
                 Activity log = new Activity();
                 log.setSubject(configName.getText());
@@ -353,6 +391,8 @@ public class MainWindowController implements Initializable {
                 log.setType(activity);
 
                 model.saveActivity(log);
+                lstConfiguration.getItems().clear();
+                lstConfiguration.getItems().addAll(model.getConfigs());
             }
         } else {
             for (Key key : keys) {
@@ -369,7 +409,9 @@ public class MainWindowController implements Initializable {
             model.saveActivity(log);
 
         }
-        
+        lstConfiguration.getItems().clear();
+        lstConfiguration.getItems().addAll(model.getConfigs());
+
         settingPane.toFront();
 
     }
@@ -629,14 +671,12 @@ public class MainWindowController implements Initializable {
             }
         }
     }
-    
-    /////////////////////////////////
 
+    /////////////////////////////////
     @FXML
     private void clickHome(ActionEvent event) {
         homePane.toFront();
     }
-
 
     @FXML
     private void clickLogs(ActionEvent event) {
@@ -647,5 +687,22 @@ public class MainWindowController implements Initializable {
     private void clickSetting(ActionEvent event) {
         settingPane.toFront();
     }
-    
+
+    @FXML
+    private void clickLogOff(ActionEvent event) throws IOException {
+        Stage primaryStage = new Stage();
+        primaryStage.initModality(Modality.WINDOW_MODAL);
+        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+
+        Parent root = fxLoader.load();
+        MainViewController asv = fxLoader.getController();
+
+        Stage oldStage = (Stage) configName.getScene().getWindow();
+        oldStage.close();
+
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 }
