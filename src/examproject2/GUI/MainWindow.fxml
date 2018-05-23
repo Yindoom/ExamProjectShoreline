@@ -276,27 +276,28 @@
             </ScrollPane>
             <ScrollPane fx:id="homePane" pannable="true" prefHeight="467.0" prefWidth="699.0">
               <content>
-                <AnchorPane prefHeight="577.0" prefWidth="680.0">
+                <AnchorPane prefHeight="463.0" prefWidth="680.0">
                      <children>
-                        <ComboBox fx:id="cbmSettings" layoutX="16.0" layoutY="61.0" prefHeight="31.0" prefWidth="145.0" promptText="Select config" />
-                        <TableView fx:id="tbvConversions" layoutX="16.0" layoutY="255.0" prefHeight="190.0" prefWidth="649.0">
+                        <ComboBox fx:id="cbmSettings" layoutX="181.0" layoutY="404.0" prefHeight="31.0" prefWidth="145.0" promptText="Select config" />
+                        <TableView fx:id="tbvConversions" layoutX="16.0" layoutY="194.0" prefHeight="190.0" prefWidth="649.0">
                            <columns>
                               <TableColumn fx:id="convertName" prefWidth="195.0" text="Tasks" />
                               <TableColumn fx:id="convertProgress" minWidth="0.0" prefWidth="251.0" text="Progress" />
                               <TableColumn fx:id="convertPath" prefWidth="202.0" text="File Path" />
                            </columns>
                         </TableView>
-                        <Label layoutX="15.0" layoutY="131.0" text="File path :" />
-                        <TextField fx:id="txtPath" layoutX="73.0" layoutY="127.0" prefHeight="25.0" prefWidth="505.0" />
-                        <Button layoutX="601.0" layoutY="127.0" mnemonicParsing="false" onAction="#btnFilePath" prefHeight="25.0" prefWidth="65.0" text="Browse" />
-                        <Button layoutX="83.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnConvert" prefHeight="25.0" prefWidth="139.0" text="Start Convert" AnchorPane.rightAnchor="400.0" />
-                        <Label layoutX="20.0" layoutY="168.0" text="Save to:" />
-                        <TextField fx:id="txtSavePath" layoutX="73.0" layoutY="164.0" prefHeight="25.0" prefWidth="505.0" />
-                        <Button layoutX="600.0" layoutY="164.0" mnemonicParsing="false" onAction="#btnFilePathSave" prefHeight="25.0" prefWidth="67.0" text="Browse" />
+                        <Label layoutX="15.0" layoutY="69.0" text="File path :" />
+                        <TextField fx:id="txtPath" layoutX="73.0" layoutY="65.0" prefHeight="25.0" prefWidth="505.0" />
+                        <Button layoutX="601.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnFilePath" prefHeight="25.0" prefWidth="65.0" text="Browse" />
+                        <Button layoutX="420.0" layoutY="404.0" mnemonicParsing="false" onAction="#btnConvert" prefHeight="31.0" prefWidth="144.0" text="Start Convert" AnchorPane.rightAnchor="116.0" />
+                        <Label layoutX="20.0" layoutY="104.0" text="Save to:" />
+                        <TextField fx:id="txtSavePath" layoutX="73.0" layoutY="100.0" prefHeight="25.0" prefWidth="505.0" />
+                        <Button layoutX="600.0" layoutY="100.0" mnemonicParsing="false" onAction="#btnFilePathSave" prefHeight="25.0" prefWidth="67.0" text="Browse" />
                         <Label layoutX="15.0" layoutY="26.0" text="Current user:" />
                         <Label fx:id="lblUser" layoutX="88.0" layoutY="26.0" prefHeight="17.0" prefWidth="52.0" />
-                        <Button layoutX="288.0" layoutY="489.0" mnemonicParsing="false" onAction="#clickStop" text="Stop Convert" AnchorPane.rightAnchor="200.0" />
-                        <Button layoutX="272.0" layoutY="220.0" mnemonicParsing="false" onAction="#addConversion" prefHeight="25.0" prefWidth="146.0" text="Add to Tasks" />
+                        <Button disable="true" layoutX="557.0" layoutY="407.0" mnemonicParsing="false" onAction="#clickStop" opacity="0.0" text="Stop Convert" AnchorPane.rightAnchor="37.0" />
+                        <Button layoutX="274.0" layoutY="145.0" mnemonicParsing="false" onAction="#addConversion" prefHeight="25.0" prefWidth="146.0" text="Add to Tasks" />
+                        <Label layoutX="97.0" layoutY="411.0" text="Select Config" />
                      </children>
                   </AnchorPane>
               </content>
