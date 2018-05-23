@@ -24,24 +24,24 @@ import examproject2.BE.Config;
  * @author Yindo
  */
 public class ConverterTest {
-    
+
     xlsxConverter instance = new xlsxConverter();
-    
+
     public ConverterTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -62,15 +62,5 @@ public class ConverterTest {
         int actualResult = instance.getJsonFiles().length();
         int expResult = 49;
         assertEquals(expResult, actualResult);
-    }
-    
-    @Test
-    public void testCalculateProgress() {
-        System.out.println("calculate");
-        int rows = 1_025_024;
-        int rowNum = 1;
-        double expRes = 9.7558691308691308691308691308691e-7;
-        double actualRes = instance.calculateProgress(rowNum, rows);
-        assertEquals(expRes, actualRes, 0.005);
     }
 }
