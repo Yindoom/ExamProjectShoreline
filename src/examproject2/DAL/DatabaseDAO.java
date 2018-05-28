@@ -27,11 +27,12 @@ import javafx.collections.ObservableList;
 public class DatabaseDAO {
 
     ConnectionPool conPool = ConnectionPool.getInstance();
+
     public List<Key> getKeyWords(Config configuration) {
         List<Key> configs
                 = new ArrayList();
-        
-        try (Connection con = conPool.checkOut()) {
+        Connection con = conPool.checkOut();
+        try {
             PreparedStatement stmt
                     = con.prepareStatement("SELECT * FROM keyword WHERE config=?");
             stmt.setInt(1, configuration.getId());
@@ -48,6 +49,8 @@ public class DatabaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
+        } finally {
+            conPool.checkIn(con);
         }
         return configs;
     }
@@ -55,8 +58,8 @@ public class DatabaseDAO {
     List<Config> getConfigs() {
         List<Config> configs
                 = new ArrayList();
-
-        try (Connection con = conPool.checkOut()) {
+        Connection con = conPool.checkOut();
+        try {
             PreparedStatement stmt
                     = con.prepareStatement("SELECT * FROM Configs");
             ResultSet rs = stmt.executeQuery();
@@ -66,16 +69,18 @@ public class DatabaseDAO {
                 config.setId(rs.getInt("id"));
                 configs.add(config);
             }
-            conPool.checkIn(con);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
+        } finally {
+            conPool.checkIn(con);
         }
         return configs;
     }
 
     public void saveConfig(Config config) {
-        try (Connection con = conPool.checkOut()) {
+        Connection con = conPool.checkOut();
+        try {
             String sql
                     = "INSERT INTO Configs"
                     + "(name) "
@@ -99,11 +104,14 @@ public class DatabaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
+        } finally {
+            conPool.checkIn(con);
         }
     }
 
     public void saveKey(Key key) {
-        try (Connection con = conPool.checkOut()) {
+        Connection con = conPool.checkOut();
+        try {
             String sql
                     = "INSERT INTO keyword"
                     + "(keyword, jsonAttribute, config, secondarykeyword, defaultvalue) "
@@ -122,18 +130,20 @@ public class DatabaseDAO {
             if (affected < 1) {
                 throw new SQLException("keyword could not be added");
             }
-            conPool.checkIn(con);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
+        } finally {
+            conPool.checkIn(con);
         }
     }
 
     ObservableList<Activity> getActivities() {
         List<Activity> activity
                 = new ArrayList();
-
-        try (Connection con = conPool.checkOut()) {
+        Connection con = conPool.checkOut();
+        try {
+            System.out.println(con);
             PreparedStatement stmt
                     = con.prepareStatement("SELECT * FROM ErrorLog");
             ResultSet rs = stmt.executeQuery();
@@ -142,20 +152,22 @@ public class DatabaseDAO {
                 log.setName(rs.getString("userName"));
                 log.setType(rs.getString("activitytype"));
                 log.setSubject(rs.getString("activity"));
-                
+
                 activity.add(log);
             }
-            conPool.checkIn(con);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
 
+        } finally {
+            conPool.checkIn(con);
         }
         return FXCollections.observableArrayList(activity);
     }
 
     public void updateKey(Key key) {
-        try (Connection con = conPool.checkOut()) {
+        Connection con = conPool.checkOut();
+        try {
             String sql
                     = "UPDATE keyword SET "
                     + "keyword=?, secondarykeyword=?, defaultvalue=? "
@@ -173,16 +185,17 @@ public class DatabaseDAO {
             if (affected < 1) {
                 throw new SQLException("keyword could not be updated");
             }
-            conPool.checkIn(con);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
+        } finally {
+            conPool.checkIn(con);
         }
     }
 
     public void log(Activity log) {
-
-        try (Connection con = conPool.checkOut()) {
+        Connection con = conPool.checkOut();
+        try {
             String sql
                     = "INSERT INTO ErrorLog"
                     + "(userName, activitytype, activity) "
@@ -194,16 +207,17 @@ public class DatabaseDAO {
             pstmt.setString(1, log.getName());
             pstmt.setString(2, log.getType());
             pstmt.setString(3, log.getSubject());
-            
+
             int affected = pstmt.executeUpdate();
             if (affected < 1) {
                 throw new SQLException("Log could not be added");
             }
-            conPool.checkIn(con);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);
         }
-
+        finally {
+            conPool.checkIn(con);
+        }
     }
 }
