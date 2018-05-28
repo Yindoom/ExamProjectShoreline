@@ -121,7 +121,6 @@ public class ConfigViewController implements Initializable {
     @FXML
     private void clickSave(ActionEvent event) throws IOException {
         List<Key> keys = new ArrayList();
-
         keys.add(new Key("type"));
         keys.add(new Key("externalWorkOrderId"));
         keys.add(new Key("systemStatus"));

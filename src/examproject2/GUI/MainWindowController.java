@@ -220,7 +220,7 @@ public class MainWindowController implements Initializable {
             log.setName(currentUser);
             log.setType("Convert");
             model.saveActivity(log);
-
+            lstActivity.getItems().setAll(model.getActivity());
         }
 
         model.convert(tbvConversions.getItems(), cbmSettings.getSelectionModel().getSelectedItem());
@@ -391,6 +391,7 @@ public class MainWindowController implements Initializable {
                 log.setType(activity);
 
                 model.saveActivity(log);
+                lstActivity.getItems().setAll(model.getActivity());
                 lstConfiguration.getItems().clear();
                 lstConfiguration.getItems().addAll(model.getConfigs());
             }
@@ -407,6 +408,7 @@ public class MainWindowController implements Initializable {
             log.setType(activity);
 
             model.saveActivity(log);
+            lstActivity.getItems().setAll(model.getActivity());
 
         }
         lstConfiguration.getItems().clear();
