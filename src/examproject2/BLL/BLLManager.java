@@ -26,7 +26,6 @@ import org.apache.poi.ss.usermodel.Sheet;
  */
 public class BLLManager implements IBLLFacade {
 
-    ThreadPool threads = ThreadPool.getInstance();
     private static BLLManager INSTANCE;
     IDALFacade dal = new DALManager();
 
@@ -40,12 +39,12 @@ public class BLLManager implements IBLLFacade {
     @Override
     public void convert(ObservableList<Conversion> conversions, Config con) throws IOException {
 
-        for (Conversion conversion : conversions) {
-            try{
-                Thread t = new Thread(setTask(conversion, con));
-            t.setDaemon(true);
-            conversion.setTask(t);
-            } catch(NullPointerException e) {
+        for (Conversion conversion : conversions) {                             // goes through all Conversions in the list
+            try {                                                               // 3 times, to set their threads
+                Thread t = new Thread(setTask(conversion, con));                // start the threads, and join the threads
+                t.setDaemon(true);
+                conversion.setTask(t);
+            } catch (NullPointerException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("No config");
                 alert.setContentText("Please select a configuration");
@@ -136,8 +135,8 @@ public class BLLManager implements IBLLFacade {
         return runCon;
     }
 
-    public Sheet getSheet(String path) throws IOException {
-        Sheet sheet = null;
+    public Sheet getSheet(String path) throws IOException {                     // saves the sheet to memory, using
+        Sheet sheet = null;                                                     // methods based on which type of file
         if (path.endsWith(".csv")) {
             sheet = dal.getCSV(path);
         }
