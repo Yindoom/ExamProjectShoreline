@@ -5,7 +5,6 @@
  */
 package examproject2.GUI;
 
-import examproject2.BE.Admin;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
