@@ -12,6 +12,7 @@ import examproject2.BE.Key;
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.ObservableList;
+import org.apache.poi.ss.usermodel.Sheet;
 
 /**
  *
@@ -32,5 +33,7 @@ public interface IBLLFacade {
     public void log(Activity log);
 
     public ObservableList getActivity();
+    
+    public Sheet getSheet(String path) throws IOException;
 
 }

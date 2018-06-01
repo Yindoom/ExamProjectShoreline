@@ -59,7 +59,7 @@ public class xlsxConverter {
                     getHeaders(cell);
                 }
 
-                if (!cellIterator.hasNext()) {
+                if (!cellIterator.hasNext() && row.getRowNum() == 0) {
                     setIndex();
                 }
 

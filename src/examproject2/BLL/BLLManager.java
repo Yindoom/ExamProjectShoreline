@@ -114,7 +114,7 @@ public class BLLManager implements IBLLFacade {
             @Override
             public void run() {
                 xlsxConverter converter = new xlsxConverter();
-                List<Config> config = new ArrayList(dal.getConfig(con));
+                List<Key> config = new ArrayList(dal.getConfig(con));
 
                 try {
                     converter.convert(getSheet(conversion.getFilePath()), config, conversion);

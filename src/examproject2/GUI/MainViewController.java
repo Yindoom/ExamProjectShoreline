@@ -26,8 +26,6 @@ import javafx.stage.Stage;
  */
 public class MainViewController implements Initializable {
 
-    Model model = Model.getInstance();
-
     @FXML
     private TextField txtName;
     @FXML
@@ -56,22 +54,5 @@ public class MainViewController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.showAndWait();
         }
-        
-        /*if (!txtName.getText().isEmpty()) {
-            Stage primaryStage = new Stage();
-            primaryStage.initModality(Modality.WINDOW_MODAL);
-            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("ConverterView.fxml"));
-
-            Parent root = fxLoader.load();
-            ConverterViewController cvc = fxLoader.getController();
-            cvc.setUser(txtName.getText());
-
-            Stage oldStage = (Stage) loginButton.getScene().getWindow();
-            oldStage.close();
-
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.showAndWait();
-        }*/
     }
 }
