@@ -45,7 +45,6 @@ public class DatabaseDAO {
                 config.setKeyWord(rs.getString("keyword"));
                 configs.add(config);
             }
-            conPool.checkIn(con);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);

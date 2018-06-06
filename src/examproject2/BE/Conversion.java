@@ -35,9 +35,7 @@ public class Conversion {
     public ObjectProperty taskProperty() {
         return task;
     }
-    
 
-    
     public String getSavePath() {
         return savePath;
     }

@@ -203,7 +203,8 @@ public class MainWindowController implements Initializable {
         String Stringpath = null;
 
         final FileChooser fileChooser = new FileChooser();
-
+        
+        
         File filePath = fileChooser.showOpenDialog(null);
         if (filePath != null) {
             Stringpath = filePath.getAbsolutePath();
@@ -308,6 +309,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void btnAdd(ActionEvent event) throws IOException {
+        edit = false;
         ObservableList<Node> logNodes = logAnchor.getChildren();
 
         for (Node logNode : logNodes) {

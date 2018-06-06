@@ -51,7 +51,7 @@ public class ConnectionPool extends ObjectPool<Connection> {
     }
 
     @Override
-    protected Connection create(){
+    protected Connection create() {
         try {
             con = connector.getConnection();
         } catch (SQLServerException ex) {
@@ -59,11 +59,9 @@ public class ConnectionPool extends ObjectPool<Connection> {
         }
         return con;
     }
-    
-            public synchronized static ConnectionPool getInstance()
-    {
-        if (INSTANCE == null)
-        {
+
+    public synchronized static ConnectionPool getInstance() {
+        if (INSTANCE == null) {
             INSTANCE = new ConnectionPool();
         }
         return INSTANCE;
