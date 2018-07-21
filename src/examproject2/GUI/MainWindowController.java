@@ -170,6 +170,28 @@ public class MainWindowController implements Initializable {
     private ScrollPane setPane;
     @FXML
     private VBox logAnchor;
+    @FXML
+    private VBox type;
+    @FXML
+    private VBox externalWorkOrderId;
+    @FXML
+    private VBox systemStatus;
+    @FXML
+    private VBox userStatus;
+    @FXML
+    private VBox name;
+    @FXML
+    private VBox priority;
+    @FXML
+    private VBox status;
+    @FXML
+    private VBox latestFinishDate;
+    @FXML
+    private VBox earliestStartDate;
+    @FXML
+    private VBox latestStartDate;
+    @FXML
+    private VBox estimatedTime;
 
     /**
      * Initializes the controller class.
@@ -182,11 +204,13 @@ public class MainWindowController implements Initializable {
         convertProgress
                 .setCellFactory(ProgressBarTableCell.<Conversion>forTableColumn());
         convertPath.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().filePathProperty());
+
         setConfigs();
 
         colUse.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().nameProperty());
         colAct.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().typeProperty());
         colSub.setCellValueFactory((cellFeatures) -> cellFeatures.getValue().subjectProperty());
+
         lstActivity.setItems(model.getActivity());
 
         lstConfiguration.getItems().setAll(model.getConfigs());
@@ -203,8 +227,7 @@ public class MainWindowController implements Initializable {
         String Stringpath = null;
 
         final FileChooser fileChooser = new FileChooser();
-        
-        
+
         File filePath = fileChooser.showOpenDialog(null);
         if (filePath != null) {
             Stringpath = filePath.getAbsolutePath();
@@ -259,9 +282,9 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickStop(ActionEvent event) {
+    private void clickStop(ActionEvent event) throws InterruptedException {
         for (Conversion con : tbvConversions.getItems()) {
-            con.getTask().interrupt();
+            con.getTask().wait();
         }
     }
 
@@ -340,11 +363,11 @@ public class MainWindowController implements Initializable {
             }
         }
 
-        setPane.toFront();
         setUser(currentUser, "Add");
+        setPane.toFront();
 
     }
-    ////////////////////////////
+    //////////////////////////// 
 
     public void setUser(String currentUser, String activity) {
         user = currentUser;
@@ -425,7 +448,46 @@ public class MainWindowController implements Initializable {
         this.id = selectedConfig.getId();
         edit = true;
         List<Key> keys = model.getKeys(selectedConfig);
-        for (Key key : keys) {
+        ObservableList<Node> logNodes = logAnchor.getChildren();
+
+        for (Node logNode : logNodes) {
+
+            if (logNode.getClass() == HBox.class) {
+                HBox hbox = (HBox) logNode;
+                ObservableList<Node> hboxChildren = hbox.getChildren();
+
+                for (Node node : hboxChildren) {
+
+                    if (node.getClass() == VBox.class) {
+                        VBox vbox = (VBox) node;
+
+                        for (Key key : keys) {
+
+                            if (vbox.getId().equals(key.getJsonAttribute())) {
+
+                                ObservableList<Node> vboxChildren = vbox.getChildren();
+                                for (Node node1 : vboxChildren) {
+                                    if (node1.getClass() == TextField.class) {
+                                        TextField text = (TextField) node1;
+
+                                        if (text.getId().contains("Key")) {
+                                            text.setText(key.getKeyWord());
+                                        }
+                                        if (text.getId().contains("Sec")) {
+                                            text.setText(key.getSecondaryKeyWord());
+                                        }
+                                        if (text.getId().contains("Def")) {
+                                            text.setText(key.getDefaultValue());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /*for (Key key : keys) {
             if (key.getJsonAttribute().equals("type")) {
                 if (key.getKeyWord() != null) {
                     typeKey.setText(key.getKeyWord());
@@ -547,130 +609,46 @@ public class MainWindowController implements Initializable {
                     timeDef.setText(key.getDefaultValue());
                 }
             }
-        }
+        }*/
     }
 
     public void save(List<Key> keys) {
-        for (Key key : keys) {
-            if (key.getJsonAttribute().equals("type")) {
-                if (!typeKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(typeKey.getText());
-                }
-                if (!typeSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(typeSec.getText());
-                }
-                if (!typeDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(typeDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("externalWorkOrderId")) {
-                if (!externalKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(externalKey.getText());
-                }
-                if (!externalSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(externalSec.getText());
-                }
-                if (!externalDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(externalDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("systemStatus")) {
-                if (!sysKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(sysKey.getText());
-                }
-                if (!sysSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(sysSec.getText());
-                }
-                if (!sysDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(sysDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("userStatus")) {
-                if (!userKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(userKey.getText());
-                }
-                if (!userSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(userSec.getText());
-                }
-                if (!userDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(userDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("name")) {
-                if (!nameKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(nameKey.getText());
-                }
-                if (!nameSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(nameSec.getText());
-                }
-                if (!nameDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(nameDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("priority")) {
-                if (!priorityKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(priorityKey.getText());
-                }
-                if (!prioritySec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(prioritySec.getText());
-                }
-                if (!priorityDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(priorityDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("status")) {
-                if (!statusKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(statusKey.getText());
-                }
-                if (!statusSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(statusSec.getText());
-                }
-                if (!statusDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(statusDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("latestFinishDate")) {
-                if (!finishKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(finishKey.getText());
-                }
-                if (!finishSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(finishSec.getText());
-                }
-                if (!finishDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(finishDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("earliestStartDate")) {
-                if (!earlyStartKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(earlyStartKey.getText());
-                }
-                if (!earlyStartSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(earlyStartSec.getText());
-                }
-                if (!earlyStartDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(earlyStartDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("latestStartDate")) {
-                if (!lateStartKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(lateStartKey.getText());
-                }
-                if (!lateStartSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(lateStartSec.getText());
-                }
-                if (!lateStartDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(lateStartDef.getText());
-                }
-            }
-            if (key.getJsonAttribute().equals("estimatedTime")) {
-                if (!timeKey.getText().trim().isEmpty()) {
-                    key.setKeyWord(timeKey.getText());
-                }
-                if (!timeSec.getText().trim().isEmpty()) {
-                    key.setSecondaryKeyWord(timeSec.getText());
-                }
-                if (!timeDef.getText().trim().isEmpty()) {
-                    key.setDefaultValue(timeDef.getText());
+        ObservableList<Node> logNodes = logAnchor.getChildren();
+
+        for (Node logNode : logNodes) {
+
+            if (logNode.getClass() == HBox.class) {
+                HBox hbox = (HBox) logNode;
+                ObservableList<Node> hboxChildren = hbox.getChildren();
+
+                for (Node node : hboxChildren) {
+
+                    if (node.getClass() == VBox.class) {
+                        VBox vbox = (VBox) node;
+
+                        for (Key key : keys) {
+
+                            if (vbox.getId().equals(key.getJsonAttribute())) {
+
+                                ObservableList<Node> vboxChildren = vbox.getChildren();
+                                for (Node node1 : vboxChildren) {
+                                    if (node1.getClass() == TextField.class) {
+                                        TextField text = (TextField) node1;
+
+                                        if (text.getId().contains("Key") && !text.getText().trim().isEmpty()) {
+                                            key.setKeyWord(text.getText());
+                                        }
+                                        if (text.getId().contains("Sec") && !text.getText().trim().isEmpty()) {
+                                            key.setSecondaryKeyWord(text.getText());
+                                        }
+                                        if (text.getId().contains("Def") && !text.getText().trim().isEmpty()) {
+                                            key.setDefaultValue(text.getText());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -678,17 +656,20 @@ public class MainWindowController implements Initializable {
 
     /////////////////////////////////
     @FXML
-    private void clickHome(ActionEvent event) {
+    private void clickHome(ActionEvent event
+    ) {
         homePane.toFront();
     }
 
     @FXML
-    private void clickLogs(ActionEvent event) {
+    private void clickLogs(ActionEvent event
+    ) {
         logPane.toFront();
     }
 
     @FXML
-    private void clickSetting(ActionEvent event) {
+    private void clickSetting(ActionEvent event
+    ) {
         settingPane.toFront();
     }
 

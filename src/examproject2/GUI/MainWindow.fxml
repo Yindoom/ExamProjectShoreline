@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="467.0" prefWidth="820.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.MainWindowController">
+<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="827.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="examproject2.GUI.MainWindowController">
     <stylesheets>
         <URL value="@mainwindow.css" />
     </stylesheets>
@@ -31,6 +31,32 @@
       </VBox>
       <StackPane layoutX="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <ScrollPane fx:id="settingPane" prefHeight="467.0" prefWidth="699.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="689.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnEdit" text="Edit Config" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                        <ListView fx:id="lstConfiguration" prefHeight="373.0" prefWidth="543.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" />
+                        <Button mnemonicParsing="false" onAction="#btnAdd" text="Add Config" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="50.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <ScrollPane fx:id="logPane" prefHeight="467.0" prefWidth="699.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="694.0">
+                     <children>
+                        <TableView fx:id="lstActivity" prefHeight="462.0" prefWidth="699.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-210.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="colSub" prefWidth="244.0" text="Config/File" />
+                              <TableColumn fx:id="colUse" prefWidth="194.0" text="User" />
+                              <TableColumn fx:id="colAct" prefWidth="258.0" text="Type of activity" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
             <ScrollPane fx:id="setPane" prefHeight="467.0" prefWidth="694.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="799.0" prefWidth="678.0">
@@ -56,7 +82,7 @@
                               </HBox>
                               <HBox prefHeight="177.0" prefWidth="696.0">
                                  <children>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="type" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="type" />
                                           <Label text="Keyword" />
@@ -70,7 +96,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="externalWorkOrderId" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="externalWorkOrderId" />
                                           <Label text="Keyword" />
@@ -84,7 +110,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="systemStatus" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="systemStatus" />
                                           <Label text="Keyword" />
@@ -98,7 +124,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="userStatus" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="userStatus" />
                                           <Label text="Keyword" />
@@ -119,7 +145,7 @@
                               </HBox>
                               <HBox prefHeight="177.0" prefWidth="685.0">
                                  <children>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="name" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="name" />
                                           <Label text="Keyword" />
@@ -133,7 +159,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="priority" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="priority" />
                                           <Label text="Keyword" />
@@ -147,7 +173,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="status" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="status" />
                                           <Label text="Keyword" />
@@ -176,7 +202,7 @@
                               </Label>
                               <HBox prefHeight="177.0" prefWidth="717.0">
                                  <children>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="latestFinishDate" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="latestFinishDate" />
                                           <Label text="Keyword" />
@@ -190,7 +216,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="earliestStartDate" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="earliestStartDate" />
                                           <Label text="Keyword" />
@@ -204,7 +230,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="latestStartDate" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="latestStartDate" />
                                           <Label text="Keyword" />
@@ -218,7 +244,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="159.0">
+                                    <VBox fx:id="estimatedTime" prefHeight="200.0" prefWidth="159.0">
                                        <children>
                                           <Label text="estimatedTime" />
                                           <Label text="Keyword" />
@@ -244,32 +270,6 @@
                               </Button>
                            </children>
                         </VBox>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
-            <ScrollPane fx:id="settingPane" prefHeight="467.0" prefWidth="699.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="689.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#btnEdit" text="Edit Config" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                        <ListView fx:id="lstConfiguration" prefHeight="373.0" prefWidth="543.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" />
-                        <Button mnemonicParsing="false" onAction="#btnAdd" text="Add Config" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="50.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
-            <ScrollPane fx:id="logPane" prefHeight="467.0" prefWidth="699.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="694.0">
-                     <children>
-                        <TableView fx:id="lstActivity" prefHeight="462.0" prefWidth="699.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-210.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn fx:id="colSub" prefWidth="244.0" text="Config/File" />
-                              <TableColumn fx:id="colUse" prefWidth="194.0" text="User" />
-                              <TableColumn fx:id="colAct" prefWidth="258.0" text="Type of activity" />
-                           </columns>
-                        </TableView>
                      </children>
                   </AnchorPane>
               </content>

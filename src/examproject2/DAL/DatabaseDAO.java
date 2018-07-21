@@ -99,7 +99,6 @@ public class DatabaseDAO {
             if (rs.next()) {
                 config.setId(rs.getInt(1));
             }
-            conPool.checkIn(con);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseDAO.class.getName()).log(
                     Level.SEVERE, null, ex);

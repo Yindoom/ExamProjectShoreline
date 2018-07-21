@@ -27,6 +27,7 @@ public class Model {
     }
 
     IBLLFacade bll;
+   
     
 
     public static Model getInstance() {
